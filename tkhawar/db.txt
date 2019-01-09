@@ -1,0 +1,84 @@
+CREATE database  IF NOT EXISTS projet;
+USE projet;
+
+CREATE TABLE etudiant(
+    ids INT AUTO_INCREMENT PRIMARY KEY,
+    nom CHARACTER(60),
+    prenom CHARACTER(60), 
+    phone CHARACTER(90),
+    image CHARACTER(10),
+    iduser INT,
+    Constraint id11 foreign key(iduser) REFERENCES user (iduser)
+);
+CREATE TABLE cv(
+    idcv INT AUTO_INCREMENT PRIMARY KEY,
+    ids INT,
+    video CHARACTER(10),
+    Constraint id1 foreign key(ids) REFERENCES etudiant (ids)
+);
+CREATE TABLE listlanguage(
+    idlanguage INT AUTO_INCREMENT PRIMARY KEY,
+    language CHARACTER(20)
+);
+CREATE TABLE competence(
+    idcmp INT AUTO_INCREMENT PRIMARY KEY,
+    idcv INT,
+    competence TEXT,
+    niveauc NUMERIC(1),
+    Constraint id2 foreign key(idcv) REFERENCES cv (idcv)
+);
+CREATE TABLE language(
+    idl INT AUTO_INCREMENT PRIMARY KEY,
+    idcv INT,
+    idlanguage INT,
+    niveaul NUMERIC(1),
+    Constraint id3 foreign key(idcv) REFERENCES cv (idcv),
+    Constraint id4 foreign key(idlanguage) REFERENCES listlanguage (idlanguage)
+);
+CREATE TABLE experience(
+    idexp INT AUTO_INCREMENT PRIMARY KEY,
+    idcv INT,
+    para TEXT,
+    Constraint id5 foreign key(idcv) REFERENCES cv (idcv)
+);
+CREATE TABLE entreprise(
+    idb INT AUTO_INCREMENT PRIMARY KEY,
+    name CHARACTER(30),
+    adresse CHARACTER(60),
+    phoneb CHARACTER(20),
+    logo CHARACTER(10),
+    iduser INT,
+    Constraint id12 foreign key(iduser) REFERENCES user (iduser)
+);
+CREATE TABLE offre(
+    idoffre INT AUTO_INCREMENT PRIMARY KEY,
+    idb INT,
+    intitule CHARACTER(40),
+    competence CHARACTER(160),
+    dureestage CHARACTER(20),
+    banner CHARACTER(10),
+    Constraint id6 foreign key(idb) REFERENCES entreprise (idb)
+);
+CREATE TABLE candidature(
+    idc INT AUTO_INCREMENT PRIMARY KEY,
+    idoffre INT,
+    ids INT,
+    dat DATE,
+    Constraint id7 foreign key(idoffre) REFERENCES offre (idoffre),
+    Constraint id8 foreign key(ids) REFERENCES etudiant (ids)
+);
+CREATE TABLE user(
+    iduser INT AUTO_INCREMENT PRIMARY KEY,
+    role   NUMERIC(1),
+    username CHARACTER(20),
+    login CHARACTER(20),
+    password CHARACTER(20)
+);
+CREATE TABLE diplome(
+    idd INT AUTO_INCREMENT PRIMARY KEY,
+    idcv INT,
+    diplome CHARACTER(50),
+    ecole CHARACTER(50),
+    annee NUMERIC(4),
+    Constraint id15 foreign key(idcv) REFERENCES cv (idcv)
+);
