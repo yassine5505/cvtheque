@@ -75,7 +75,7 @@
             <div class="form-row">
               <div class="col-6">
                 <div class="form-label-group">
-                  <input type="text" id="apogee" name="apogee" class="form-control"  value="<?= $e['numero_apogee'] ?>" required="required"></textarea>
+                  <input type="text" id="apogee" name="apogee" class="form-control"  value="<?= $e['numero_apogee'] ?>" disabled></textarea>
                   <label for="apogee">Apogée</label>
                 </div>
               </div>
