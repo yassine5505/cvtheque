@@ -18,7 +18,7 @@
     }
     else{
       echo "
-        <script>alert('".$_POST['nom']." n'a pas été modifié.Veuillez réessayer.')</script>
+        <script>alert('".$_POST['nom']." n'a pas été modifié.Veuillez réessayer.');</script>
       ";
     }
   }

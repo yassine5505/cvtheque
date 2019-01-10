@@ -110,13 +110,14 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
 
 //function that modifies entreprise based on nom
 function modifierEtudiant($id,$nom,$prenom,$phone,$description,$conn){
-  $updateEtudiant = $conn->query("UPDATE etudiants SET nom='$nom',prenom='$prenom',phone='$phone',description='$description' where id=$id");
-  // $updateEtudiant = $conn->prepare("UPDATE etudiants set nom=:nom,prenom=:prenom,phone=:phone,description=:description where id=$id");
-  // $updateEtudiant->bindParam(':nom',$nom,PDO::PARAM_STR);
-  // $updateEtudiant->bindParam(':prenom',$prenom,PDO::PARAM_STR);
-  // $updateEtudiant->bindParam(':phone',$phone,PDO::PARAM_STR);
-  // $updateEtudiant->bindParam(':description',$description,PDO::PARAM_STR);
-  // $updateEtudiant->execute();
+  //$updateEtudiant = $conn->query("UPDATE etudiants SET nom='$nom',prenom='$prenom',phone='$phone',description='$description' where id=$id");
+  $updateEtudiant = $conn->prepare("UPDATE etudiants set nom=:nom,prenom=:prenom,phone=:phone,description=:description where id=:id");
+  $updateEtudiant->bindValue(':id',$id,PDO::PARAM_INT);
+  $updateEtudiant->bindValue(':nom',$nom,PDO::PARAM_STR);
+  $updateEtudiant->bindValue(':prenom',$prenom,PDO::PARAM_STR);
+  $updateEtudiant->bindValue(':phone',$phone,PDO::PARAM_STR);
+  $updateEtudiant->bindValue(':description',$description,PDO::PARAM_STR);
+  $updateEtudiant->execute();
   if($updateEtudiant){
     return true ;
   }
