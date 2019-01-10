@@ -59,7 +59,7 @@
                       <td><?= $o['prenom'] ?></td>
                       <td><?= $o['phone'] ?></td>
                       <td>
-                        <a class="btn btn-sm btn-primary fa fa-pen" href="modifierEtudiant?idEtudiant=<?= $o['id'] ?>"></a>
+                        <a class="btn btn-sm btn-primary fa fa-pen" href="modifierEtudiant.php?idEtudiant=<?= $o['id'] ?>"></a>
                         <a class="btn btn-sm btn-danger fa fa-times" href=""></a>
                       </td>
                     </tr>

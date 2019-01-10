@@ -37,18 +37,28 @@
     <div id="content-wrapper">
       <div id="container-fluid">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-1">
             </div>
-            <div class="profile col-sm-8">
+            <div class="profile col-sm-10">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="name"><?= $nom ?> <?= $prenom ?><h5>
-                        <img class="tof" width="100" src="<?=$imgPath?>" alt="">
+                        <img class="tof" width="130" src="<?=$imgPath?>" alt="">
                         <p class="desc"><?= $description ?><p>
                     </div>
                     <div class="card-footer">
-                        <p align="center" class="apogee">Apogée : <?= $apogee ?><p>
-                        <p align="center" class="phone">Téléphone : <?= $tele ?><p>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <i class="fas fa-info-circle cv-icon"></i> <span class="cv-label">Informations :</span>
+                                <hr class="hr">
+                                <p class="apogee"><i class="fas fa-phone-square cv-icon-small"></i>  <?= $apogee ?><p>
+                                <p class="phone">Téléphone : <?= $tele ?><p>
+                            </div>
+                            <div class="col-sm-7">
+                                <p class="apogee">Apogée : <?= $apogee ?><p>
+                                <p class="phone">Téléphone : <?= $tele ?><p>
+                            </div>
+                        </div>
                     </div>
                     <a class="modify" href="modifierProfil.php"><button type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
                 </div>
@@ -94,6 +104,16 @@
                     margin-left: auto;
                     margin-right: auto;
                     border-radius: 10%;
+                }
+                .cv-icon{
+                    font-size: 22px;
+                }
+                .cv-label{
+                    font-size: 23px;
+                    font-weight: bold;
+                }
+                .hr{
+                    border-top: 2px solid rgb(68, 68, 64);
                 }
             </style>
         </div>

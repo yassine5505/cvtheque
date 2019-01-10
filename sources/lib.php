@@ -110,7 +110,8 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
 
 //function that modifies entreprise based on nom
 function modifierEtudiant($id,$nom,$prenom,$phone,$description,$conn){
-  $updateEtudiant = $conn->query("UPDATE etudiants SET nom='$nom',prenom='$prenom',phone='$phone',description='$description' where id=$id");
+  echo "UPDATE etudiants SET nom='$nom',prenom='$prenom',phone='$phone', description='$description' where id=$id";
+  $updateEtudiant = $conn->query("UPDATE etudiants SET nom='$nom',prenom='$prenom',phone='$phone', description='$description' where id=$id");
   // $updateEtudiant = $conn->prepare("UPDATE etudiants set nom=:nom,prenom=:prenom,phone=:phone,description=:description where id=$id");
   // $updateEtudiant->bindParam(':nom',$nom,PDO::PARAM_STR);
   // $updateEtudiant->bindParam(':prenom',$prenom,PDO::PARAM_STR);
