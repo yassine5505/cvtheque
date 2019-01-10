@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2019 at 10:50 AM
+-- Generation Time: Jan 10, 2019 at 08:52 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -36,6 +36,18 @@ CREATE TABLE `competences` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `competences_requises`
+--
+
+CREATE TABLE `competences_requises` (
+  `id` int(11) NOT NULL,
+  `competence` varchar(255) NOT NULL,
+  `offre_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `entreprises`
 --
 
@@ -53,6 +65,7 @@ CREATE TABLE `entreprises` (
 --
 
 INSERT INTO `entreprises` (`id`, `nom`, `adresse`, `phone`, `description`, `logo`) VALUES
+(14, 'Ensa tanger', 'Tanger', '053744552233', 'Ecole ingenieurs', 'New Logo ENSA HD.png'),
 (13, 'Capgemini', 'Technopark, Casablanca', '0537887744', 'IT', 'CapGemini-logo-carre.png'),
 (12, 'Atos', 'Technopark, Rabat', '0533222211', 'SpÃ©cialisÃ©e dans IT.', 'Atos-logo-880x660.png');
 
@@ -68,6 +81,7 @@ CREATE TABLE `etudiants` (
   `nom` varchar(60) NOT NULL,
   `prenom` varchar(60) NOT NULL,
   `phone` varchar(30) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -76,12 +90,12 @@ CREATE TABLE `etudiants` (
 -- Dumping data for table `etudiants`
 --
 
-INSERT INTO `etudiants` (`id`, `numero_apogee`, `nom`, `prenom`, `phone`, `description`, `image`) VALUES
-(1, 'gh444', 'Mehdi', 'Chaert', '0654889977', '', 'mehdi-chaert.jpg'),
-(2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', '', 'saad-belgnaoui.php'),
-(3, '447', 'Reda', 'Ennakouri', '0600098419', 'genie info 4', 'zuck.jpg'),
-(4, '447788', 'Yassine', 'Chraibi', '022114455', 'Genie info 2', 'zuck.jpg'),
-(5, '741', 'Abdellah', 'Benkirane', '0669874521', 'Description de Abdellah', 'random.jpg');
+INSERT INTO `etudiants` (`id`, `numero_apogee`, `nom`, `prenom`, `phone`, `email`, `description`, `image`) VALUES
+(1, 'gh444', 'Mehdi', 'Chaou', '0654889977', '', 'Genie informatique 1 - Interesse par le developpement web', 'mehdi-chaert.jpg'),
+(2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', '', 'ElÃ¨ve ingÃ©nieur 3Ã¨me annÃ©e Informatique.\r\nEsprit d\'entreprenariat.', 'saad-belgnaoui.php'),
+(3, '447', 'Reda', 'Ennakouri', '0600098419', '', 'Etudiant GI1', 'zuck.jpg'),
+(4, '447788', 'Yassine', 'Chra', '022114455', '', 'Genie info 2', 'zuck.jpg'),
+(5, '741', 'Abdellah', 'Benkirane', '0669874521', '', 'Description de Abdellah benkirane\'d', 'random.jpg');
 
 -- --------------------------------------------------------
 
@@ -115,6 +129,12 @@ ALTER TABLE `competences`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `competences_requises`
+--
+ALTER TABLE `competences_requises`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `entreprises`
 --
 ALTER TABLE `entreprises`
@@ -142,10 +162,15 @@ ALTER TABLE `offres`
 ALTER TABLE `competences`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `competences_requises`
+--
+ALTER TABLE `competences_requises`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `entreprises`
 --
 ALTER TABLE `entreprises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `etudiants`
 --
