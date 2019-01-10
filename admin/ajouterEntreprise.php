@@ -4,7 +4,7 @@
   require '../sources/lib.php';
     if(isset($_POST['submit']) && isset($_POST['nom']) && isset($_POST['phone']) && isset($_POST['adresse'])){
     //submit form
-    
+
     ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),$conn);
     uploadLogo();
   }
@@ -65,7 +65,7 @@
             <input type="file" class="form-control-file" id="logo" name="logo">
           </div>
 
-          <button type="submit" name="submit" class="btn btn-primary btn-block">Ajouter entreprise</button>
+          <button type="submit" name="submit" class="btn btn-primary">Ajouter entreprise</button>
         </form>
       </div>
         <!--END CONTENT-->

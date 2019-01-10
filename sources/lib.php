@@ -46,7 +46,6 @@ function ajouterEntreprise($nom,$adresse,$phone,$conn){
     //insert logo
     return true;
   }
-
 }
 
   //General functions
