@@ -1,8 +1,6 @@
 <?php
-if(isset($_POST['nom'])){
-   echo '<script>alert(\'yes\')</script>';
-
-} ?>
+require('../config/dbConnection.php');
+ ?>
 
 
 <!DOCTYPE html>
