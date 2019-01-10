@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2019 at 11:27 PM
+-- Generation Time: Jan 10, 2019 at 01:57 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `competence`
+-- Table structure for table `competences`
 --
 
-CREATE TABLE `competence` (
+CREATE TABLE `competences` (
   `id` int(11) NOT NULL,
   `competence` varchar(255) DEFAULT NULL,
   `etudiant_id` int(11) DEFAULT NULL
@@ -57,17 +57,37 @@ CREATE TABLE `etudiants` (
   `numero_apogee` varchar(255) NOT NULL,
   `nom` varchar(60) NOT NULL,
   `prenom` varchar(60) NOT NULL,
-  `numero` varchar(30) NOT NULL,
+  `phone` varchar(30) NOT NULL,
   `image` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `etudiants`
+--
+
+INSERT INTO `etudiants` (`id`, `numero_apogee`, `nom`, `prenom`, `phone`, `image`) VALUES
+(1, 'gh444', 'Mehdi', 'Chaert', '0654889977', 'mehdi-chaert.jpg'),
+(2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', 'saad-belgnaoui.php');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `logo_entreprise`
+--
+
+CREATE TABLE `logo_entreprise` (
+  `id` int(11) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `entreprise_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `offre`
+-- Table structure for table `offres`
 --
 
-CREATE TABLE `offre` (
+CREATE TABLE `offres` (
   `id` int(11) NOT NULL,
   `entreprise_id` int(11) DEFAULT NULL,
   `intitule` char(40) DEFAULT NULL,
@@ -79,9 +99,9 @@ CREATE TABLE `offre` (
 --
 
 --
--- Indexes for table `competence`
+-- Indexes for table `competences`
 --
-ALTER TABLE `competence`
+ALTER TABLE `competences`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -97,9 +117,15 @@ ALTER TABLE `etudiants`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `offre`
+-- Indexes for table `logo_entreprise`
 --
-ALTER TABLE `offre`
+ALTER TABLE `logo_entreprise`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `offres`
+--
+ALTER TABLE `offres`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -107,9 +133,9 @@ ALTER TABLE `offre`
 --
 
 --
--- AUTO_INCREMENT for table `competence`
+-- AUTO_INCREMENT for table `competences`
 --
-ALTER TABLE `competence`
+ALTER TABLE `competences`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `entreprises`
@@ -120,11 +146,16 @@ ALTER TABLE `entreprises`
 -- AUTO_INCREMENT for table `etudiants`
 --
 ALTER TABLE `etudiants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `logo_entreprise`
+--
+ALTER TABLE `logo_entreprise`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `offre`
+-- AUTO_INCREMENT for table `offres`
 --
-ALTER TABLE `offre`
+ALTER TABLE `offres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
