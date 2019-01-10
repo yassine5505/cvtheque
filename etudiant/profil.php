@@ -50,7 +50,7 @@
                         <p align="center" class="apogee">Apogée : <?= $apogee ?><p>
                         <p align="center" class="phone">Téléphone : <?= $tele ?><p>
                     </div>
-                    <a class="modify" href=""><button type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
+                    <a class="modify" href="modifierProfil.php"><button type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
                 </div>
             </div>
             <style>
@@ -65,6 +65,7 @@
                 }
                 .card{
                     border-style: none;
+                    margin-bottom : 100px;
                 }
                 .profile .card-body{
                     background-image: url("../assets/backgrounds/profileBack.jpeg");
