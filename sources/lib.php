@@ -12,6 +12,7 @@ require('../config/dbConnection.php');
 
 function ajouterEntreprise($nom,$adresse,$telephone){
   // if theres a company with the same name
+  
   //else, insert it
 
 }
