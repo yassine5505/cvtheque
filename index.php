@@ -9,7 +9,7 @@
 
       $query = "SELECT * FROM etudiants where numero_apogee='".$numero_apogee."'";
       $students = $conn->query($query);
-      
+
       if($students->rowCount()>0){
         $error = false;
         $_SESSION['connected']='connected';
