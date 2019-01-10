@@ -8,14 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TITLE A MODIFIER</title>
-<<<<<<< HEAD
 
-  <?php
-  require('includes/styles.php'); ?>
-||||||| merged common ancestors
-  <?php require('includes/styles.php'); ?>
-=======
-  
   <!-- Bootstrap core CSS-->
   <link href="sources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,7 +21,6 @@
   <!-- Custom styles for this template-->
   <link href="sources/css/sb-admin.css" rel="stylesheet">
 
->>>>>>> e16f4db230596f5839a15ac079bba082ab1d1160
 </head>
 <body id="page-top">
   <?php   require('includes/topnav.php'); ?>
