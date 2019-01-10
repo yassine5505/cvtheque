@@ -73,6 +73,7 @@ function modifierEntreprise($nom,$phone,$adresse,$description,$id,$conn){
   return false;
 }
 
+//function that add etudiant to db
 function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
   $selectEtudiantByApogee = $conn->prepare("SELECT numero_apogee FROM etudiants where numero_apogee=:apogee");
   $insertEtudiant = $conn->prepare("INSERT INTO etudiants(numero_apogee,nom,prenom,phone,description) values (:apogee,:nom,:prenom,:phone,:description)");
@@ -106,6 +107,22 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
     return true;
   }
 }
+
+//function that modifies entreprise based on nom
+function modifierEtudiant($id,$nom,$prenom,$phone,$description,$conn){
+  $updateEtudiant = $conn->query("UPDATE etudiants SET nom='$nom',prenom='$prenom',phone='$phone',description='$description' where id=$id");
+  // $updateEtudiant = $conn->prepare("UPDATE etudiants set nom=:nom,prenom=:prenom,phone=:phone,description=:description where id=$id");
+  // $updateEtudiant->bindParam(':nom',$nom,PDO::PARAM_STR);
+  // $updateEtudiant->bindParam(':prenom',$prenom,PDO::PARAM_STR);
+  // $updateEtudiant->bindParam(':phone',$phone,PDO::PARAM_STR);
+  // $updateEtudiant->bindParam(':description',$description,PDO::PARAM_STR);
+  // $updateEtudiant->execute();
+  if($updateEtudiant){
+    return true ;
+  }
+  return false;
+}
+
 
 //function that returns all entreprises in array
 function listerEntreprises($conn){
@@ -144,6 +161,17 @@ function listerEtudiants($conn){
     return $selectEtudiants;
   }
 
+}
+
+// function that returns etudiant info based on numero_apgogee
+function infoEtudiant($id,$conn){
+  $selectEtudiant = $conn->prepare("SELECT * FROM etudiants WHERE id=:id limit 1");
+  $selectEtudiant->bindParam(':id',$id);
+  $selectEtudiant->execute();
+  if($selectEtudiant && $selectEtudiant->rowCount() > 0){
+
+    return $selectEtudiant;
+  }
 }
 
   //General functions

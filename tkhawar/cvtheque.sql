@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2019 at 09:54 AM
+-- Generation Time: Jan 10, 2019 at 10:50 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -53,7 +53,7 @@ CREATE TABLE `entreprises` (
 --
 
 INSERT INTO `entreprises` (`id`, `nom`, `adresse`, `phone`, `description`, `logo`) VALUES
-(13, 'Capgemini', 'Casa', '0537887744', 'IT', 'CapGemini-logo-carre.png'),
+(13, 'Capgemini', 'Technopark, Casablanca', '0537887744', 'IT', 'CapGemini-logo-carre.png'),
 (12, 'Atos', 'Technopark, Rabat', '0533222211', 'SpÃ©cialisÃ©e dans IT.', 'Atos-logo-880x660.png');
 
 -- --------------------------------------------------------
@@ -79,9 +79,9 @@ CREATE TABLE `etudiants` (
 INSERT INTO `etudiants` (`id`, `numero_apogee`, `nom`, `prenom`, `phone`, `description`, `image`) VALUES
 (1, 'gh444', 'Mehdi', 'Chaert', '0654889977', '', 'mehdi-chaert.jpg'),
 (2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', '', 'saad-belgnaoui.php'),
-(3, '447', 'Reda', 'Ennakouri', '0600098419', '', 'zuck.jpg'),
+(3, '447', 'Reda', 'Ennakouri', '0600098419', 'genie info 4', 'zuck.jpg'),
 (4, '447788', 'Yassine', 'Chraibi', '022114455', 'Genie info 2', 'zuck.jpg'),
-(5, '741', 'Anas', 'Yazss', '0533222211', 'Genie mecanique', 'random.jpg');
+(5, '741', 'Abdellah', 'Benkirane', '0669874521', 'Description de Abdellah', 'random.jpg');
 
 -- --------------------------------------------------------
 

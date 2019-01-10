@@ -37,6 +37,8 @@
                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending">Nom</th>
                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending">Prénom</th>
                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Téléphone</th>
+                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending">Actions</th>
+
               </tr>
             </thead>
                   <tfoot>
@@ -46,6 +48,7 @@
                       <th rowspan="1" colspan="1">Nom</th>
                       <th rowspan="1" colspan="1">Prenom</th>
                       <th rowspan="1" colspan="1">Téléphone</th>
+                      <th rowspan="1" colspan="1">Actions</th>
                     </tr>                  </tfoot>
                   <tbody>
                   <?php while($o = $etudiants->fetch()){ ?>
@@ -55,6 +58,10 @@
                       <td><?= $o['nom'] ?></td>
                       <td><?= $o['prenom'] ?></td>
                       <td><?= $o['phone'] ?></td>
+                      <td>
+                        <a class="btn btn-sm btn-primary fa fa-pen" href="modifierEtudiant?idEtudiant=<?= $o['id'] ?>"></a>
+                        <a class="btn btn-sm btn-danger fa fa-times" href=""></a>
+                      </td>
                     </tr>
                   <?php } ?>
                   </tbody>
