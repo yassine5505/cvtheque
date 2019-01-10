@@ -1,5 +1,4 @@
 <?php
-
 /*
 * PROFIL ADMIN
 * Ajouter entreprise
@@ -54,7 +53,11 @@ function ajouterEntreprise($nom,$adresse,$phone,$conn){
 }
 
 //function that returns all entreprises in array
-
+function listerEntreprises(){
+  $selectEntreprises = $conn->prepare("SELECT * FROM entreprises");
+  $selectEntreprisesResult = $selectEntreprises->execute();
+  
+}
 
   //General functions
 //function that updates logo. called in ajouter entreprise
