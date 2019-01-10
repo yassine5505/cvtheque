@@ -1,5 +1,6 @@
 
 <?php
+  session_start();
   require('config/dbConnection.php');
   $error = false;
   if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pwd'])) {
@@ -10,11 +11,11 @@
       $students = $conn->query($query);
       
       if($students->rowCount()>0){
-        session_start();
+        $error = false;
         $_SESSION['connected']='connected';
-        $_SESSION['apogee'] = $_POST['apogee'];
+        $_SESSION['apogee'] = $_POST['username'];
         $_SESSION['type'] = 'student';
-        header('Location: etudiant');
+        header('Location: etudiant/profil.php');
       }
       else{
         $error = true;
@@ -66,14 +67,14 @@
             <div class="form-label-group">
               <input name="username" type="text" id="username" class="form-control" placeholder="Username" required="required" autofocus="autofocus">
               <label for="username">Username</label>
-              <span <?php if($error) echo "hidden='hidden'"; ?> class="error">username incorrect</span>
+              <span <?php if(!$error) echo "hidden='hidden'"; ?> class="error">username incorrect</span>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
               <input name="pwd" type="password" id="pwd" class="form-control" placeholder="Password" required="required">
               <label for="pwd">Password</label>
-              <span <?php if($error) echo "hidden='hidden'"; ?> class="error">password incorrect</span>
+              <span <?php if(!$error) echo "hidden='hidden'"; ?> class="error">password incorrect</span>
             </div>
           </div>
           <input class="btn btn-primary btn-block" type="submit" name="login" value="login">
