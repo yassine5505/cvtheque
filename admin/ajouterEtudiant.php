@@ -2,11 +2,21 @@
   <?php
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-    if(isset($_POST['submit']) && isset($_POST['apogee']) && isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['phone']) && isset($_POST['adresse'])){
+    if(isset($_POST['submit']) && isset($_POST['apogee']) && isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['phone']) && isset($_POST['description'])){
     //submit form
-
+    if(ajouterEtudiant(clean($_POST['apogee']),clean($_POST['nom']),clean($_POST['prenom']),clean($_POST['phone']),clean($_POST['description']),$conn)){
+      //success message
+      echo "
+        <script>alert('".$_POST['nom']." ajouté avec succès.')</script>
+      ";
+    }
+    else{
+      echo "
+        <script>alert('".$_POST['nom']." n'a pas été ajouté.Réessayer.')</script>
+      ";
+    }
     //ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),clean($_POST['description']),$conn);
-    
+
   }
 
    ?>
@@ -55,13 +65,13 @@
             <div class="form-row">
               <div class="col-6">
                 <div class="form-label-group">
-                  <input  name="text" id="apogee" name="apogee" class="form-control"  placeholder="Numéro apogée" required="required"></textarea>
+                  <input type="text" id="apogee" name="apogee" class="form-control"  placeholder="Numéro apogée" required="required"></textarea>
                   <label for="apogee">Apogée</label>
                 </div>
               </div>
               <div class="col-6">
                 <div class="form-label-group">
-                  <input  name="text" id="phone" name="phone" class="form-control"  placeholder="Numéro apogée" required="required"></textarea>
+                  <input  type="text" id="phone" name="phone" class="form-control"  placeholder="Numéro apogée" required="required"></textarea>
                   <label for="phone">Téléphone</label>
                 </div>
               </div>

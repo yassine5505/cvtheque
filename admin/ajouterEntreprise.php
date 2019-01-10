@@ -5,8 +5,18 @@
     if(isset($_POST['submit']) && isset($_POST['nom']) && isset($_POST['phone']) && isset($_POST['adresse'])){
     //submit form
 
-    ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),clean($_POST['description']),$conn);
-    //uploadLogo();
+    if(ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),clean($_POST['description']),$conn)){
+      echo "
+        <script>alert('".$_POST['nom']." ajouté avec succès.')</script>
+      ";
+    }
+    else{
+      echo "
+        <script>alert('".$_POST['nom']." n'a pas été ajouté.Veuillez réessayer.')</script>
+      ";
+    }
+
+
   }
 
    ?>

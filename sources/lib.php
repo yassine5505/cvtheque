@@ -58,9 +58,9 @@ function ajouterEntreprise($nom,$adresse,$phone,$description,$conn){
 
 
 function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
-  $selectEtudiantByApogee = $conn->prepare("SELECT nom FROM etudiant where apogee=:apogee");
+  $selectEtudiantByApogee = $conn->prepare("SELECT numero_apogee FROM etudiants where numero_apogee=:apogee");
   $insertEtudiant = $conn->prepare("INSERT INTO etudiants(numero_apogee,nom,prenom,phone,description) values (:apogee,:nom,:prenom,:phone,:description)");
-  $updateEtudiant = $conn->prepare("update etudiants set image = :image where apogee=:apogee");
+  $updateEtudiant = $conn->prepare("update etudiants set image = :image where numero_apogee=:apogee");
 
 
   $selectEtudiantByApogee->bindParam(':apogee',$apogee);
@@ -68,7 +68,7 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
   $rows = $selectEtudiantByApogee->rowCount();
 
   if($rows != 0){ // une entreprise a deja ce nom
-    //first, insert logo in
+    //first, insert image in assets/imageprofil
     return false;
   }
   else{
@@ -87,7 +87,6 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
 
     $updateEtudiant->execute();
 
-    //insert logo
     return true;
   }
 }
