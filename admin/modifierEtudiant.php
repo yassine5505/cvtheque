@@ -5,8 +5,8 @@
   if (isset($_GET['idEtudiant'])){
     $e = infoEtudiant((int)$_GET['idEtudiant'],$conn)->fetch();
     // print_r($_POST)['submit'];
-    if(isset($_POST['submit']) && isset($_POST['apogee']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['phone']) && isset($_POST['description']) ){
 
+    if(isset($_POST['submit']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['phone']) && isset($_POST['description']) ){
     //submit form
     if(modifierEtudiant((int)$_GET['idEtudiant'],clean($_POST['nom']),clean($_POST['prenom']),clean($_POST['phone']),clean($_POST['description']),$conn)){
       echo "
