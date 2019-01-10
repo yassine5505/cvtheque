@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2019 at 06:17 AM
+-- Generation Time: Jan 10, 2019 at 09:54 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -53,10 +53,8 @@ CREATE TABLE `entreprises` (
 --
 
 INSERT INTO `entreprises` (`id`, `nom`, `adresse`, `phone`, `description`, `logo`) VALUES
-(6, 'Ensa tetouan', 'Mhannech, tetouan', '0537887744', '', 'New Logo ENSA HD.png'),
-(7, 'Atos', 'Casablanca', '053445621', '', 'BrazilV1DarkColors.jpg'),
-(8, 'Brazil', 'Brazil', '0599887744', '', 'BrazilV1DarkColors.jpg'),
-(11, 'Capgemini', 'Rabat, Maroc', '0531212121', 'Specialisee dans l\'informatique. plusde 10 d\'experience.', 'CapGemini-logo-carre.png');
+(13, 'Capgemini', 'Casa', '0537887744', 'IT', 'CapGemini-logo-carre.png'),
+(12, 'Atos', 'Technopark, Rabat', '0533222211', 'SpÃ©cialisÃ©e dans IT.', 'Atos-logo-880x660.png');
 
 -- --------------------------------------------------------
 
@@ -71,7 +69,7 @@ CREATE TABLE `etudiants` (
   `prenom` varchar(60) NOT NULL,
   `phone` varchar(30) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -80,7 +78,10 @@ CREATE TABLE `etudiants` (
 
 INSERT INTO `etudiants` (`id`, `numero_apogee`, `nom`, `prenom`, `phone`, `description`, `image`) VALUES
 (1, 'gh444', 'Mehdi', 'Chaert', '0654889977', '', 'mehdi-chaert.jpg'),
-(2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', '', 'saad-belgnaoui.php');
+(2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', '', 'saad-belgnaoui.php'),
+(3, '447', 'Reda', 'Ennakouri', '0600098419', '', 'zuck.jpg'),
+(4, '447788', 'Yassine', 'Chraibi', '022114455', 'Genie info 2', 'zuck.jpg'),
+(5, '741', 'Anas', 'Yazss', '0533222211', 'Genie mecanique', 'random.jpg');
 
 -- --------------------------------------------------------
 
@@ -144,12 +145,12 @@ ALTER TABLE `competences`
 -- AUTO_INCREMENT for table `entreprises`
 --
 ALTER TABLE `entreprises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `etudiants`
 --
 ALTER TABLE `etudiants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `offres`
 --

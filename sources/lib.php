@@ -56,6 +56,22 @@ function ajouterEntreprise($nom,$adresse,$phone,$description,$conn){
   }
 }
 
+//function that modifies entreprise based on nom
+function modifierEntreprise($nom,$phone,$adresse,$description,$id,$conn){
+
+  $updateEntreprise = $conn->prepare("UPDATE entreprises set nom=:nom,phone=:phone,adresse=:adresse,description=:description where id=:id");
+
+  $updateEntreprise->bindParam(':nom',$nom,PDO::PARAM_STR);
+  $updateEntreprise->bindParam(':phone',$phone,PDO::PARAM_STR);
+  $updateEntreprise->bindParam(':adresse',$adresse,PDO::PARAM_STR);
+  $updateEntreprise->bindParam(':description',$description,PDO::PARAM_STR);
+  $updateEntreprise->bindParam(':id',$id,PDO::PARAM_INT);
+  $updateEntreprise->execute();
+  if($updateEntreprise){
+    return true ;
+  }
+  return false;
+}
 
 function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
   $selectEtudiantByApogee = $conn->prepare("SELECT numero_apogee FROM etudiants where numero_apogee=:apogee");
@@ -101,6 +117,16 @@ function listerEntreprises($conn){
 
 }
 
+// function that returns entreprise info based on nom
+function infoEntreprise($nom,$conn){
+  $selectEntreprise = $conn->prepare("SELECT * FROM entreprises WHERE nom=:nom limit 1");
+  $selectEntreprise->bindParam(':nom',$nom);
+  $selectEntreprise->execute();
+  if($selectEntreprise && $selectEntreprise->rowCount() > 0){
+
+    return $selectEntreprise;
+  }
+}
 //function that returns offres  de stage in array
 function listerOffres($conn){
   $selectOffres = $conn->query("SELECT * FROM offres inner join entreprises on offres.entreprise_id = entreprises.id");

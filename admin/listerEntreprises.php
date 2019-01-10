@@ -40,7 +40,7 @@
                   <?= strtoupper( $e['nom']) ?>
                 </div>
                 <div class="col-6" style="display:inline;">
-                  <a href="#" class=" ml-4 btn btn-primary btn-sm fa fa-pen"></a>
+                  <a href="modifierEntreprise.php?nomEntreprise=<?= $e['nom'] ?>" class=" ml-4 btn btn-primary btn-sm fa fa-pen"></a>
                 </div>
               </div>
               <h5 class="card-title" style="display: inline;"></h5></a>
