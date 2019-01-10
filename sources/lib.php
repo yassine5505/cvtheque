@@ -24,7 +24,7 @@ function ajouterEntreprise($nom,$adresse,$phone,$conn){
   $selectEntrepriseByNom = $conn->prepare("SELECT nom FROM entreprises where nom=:nom");
   $insertLogo = $conn->prepare("INSERT INTO logo(url,entreprise_id) values(:url,:entreprise)");
   $insertEntreprise = $conn->prepare("INSERT INTO entreprises(nom,adresse,phone) values (:nom,:adresse,:phone)");
-  $updateEntreprise = $conn->prepare("update entreprises set logo = :logo");
+  $updateEntreprise = $conn->prepare("update entreprises set logo = :logo where nom=:nom");
 
 
   $selectEntrepriseByNom->bindParam(':nom',$nom);
@@ -45,6 +45,8 @@ function ajouterEntreprise($nom,$adresse,$phone,$conn){
     $insertEntreprise->execute();
     //update entreprise avec le path logo
     $updateEntreprise->bindParam(':logo',$logo);
+    $updateEntreprise->bindParam(':nom',$nom);
+
     $updateEntreprise->execute();
 
     //insert logo
@@ -53,10 +55,14 @@ function ajouterEntreprise($nom,$adresse,$phone,$conn){
 }
 
 //function that returns all entreprises in array
-function listerEntreprises(){
-  $selectEntreprises = $conn->prepare("SELECT * FROM entreprises");
-  $selectEntreprisesResult = $selectEntreprises->execute();
-  
+function listerEntreprises($conn){
+  $selectEntreprises = $conn->query("SELECT * FROM entreprises");
+
+  if($selectEntreprises){
+    return $selectEntreprises;
+  }
+
+
 }
 
   //General functions

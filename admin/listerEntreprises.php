@@ -3,6 +3,8 @@
   require '../config/dbConnection.php';
   require '../sources/lib.php';
 
+  $entreprises = listerEntreprises($conn);
+
    ?>
 
 <!DOCTYPE html>
@@ -11,7 +13,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>CVtheque - Ajouter entreprise</title>
+  <title>CVtheque - Lister entreprises</title>
   <?php require('../includes/styles.php'); ?>
 </head>
 <body id="page-top">
@@ -22,22 +24,24 @@
     <div id="content-wrapper">
       <div id="container-fluid">
         <div class="col-12 ml-2">
-          <h1>Liste des entreprises</h1>
-          <?php            //loop through all entreprises ?>
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-           <?php ?>
-
+          <h1 class="">Liste des entreprises</h1>
         </div>
         <?php   require('../includes/footer.php'); ?>
         <!--ADD CONTENT HERE-->
-
+        <div class="col-12 row ml-1">
+        <?php
+          while($e = $entreprises->fetch()){
+         ?>
+          <div class="card col col-lg-4"  style="width: 18rem;">
+            <img class="card-img-top" src="../assets/logos/<?= $e['logo']?>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><?= $e['nom']?></h5>
+              <p class="card-text"><i class="fa fa-phone" style="color: grey;"></i>   <?= $e['phone']?></p>
+              <p class="card-text"><i class="fa fa-home" style="color: grey;"></i>   <?= $e['adresse']?></p>
+            </div>
+          </div>
+        <?php } ?>
+        </div>
         <!--END CONTENT-->
       </div>
     </div>
