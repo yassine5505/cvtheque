@@ -14,7 +14,8 @@ require('../config/dbConnection.php');
   $selectEntrepriseByNom = $conn->prepare("SELECT nom FROM entreprises where nom=:nom");
   $insertEntreprise = $conn->prepare("INSERT INTO logo(url,entreprise_id) values(:url,:entreprise)");
   $insertEntreprise = $conn->prepare("INSERT INTO entreprises(nom,adresse,phone) values (:nom,:adresse,:phone)");
-//End prepared statemtns
+  
+  //End prepared statemtns
 
 
 // Admin functions

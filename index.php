@@ -1,15 +1,29 @@
+
 <?php
-  print_r($_POST);
+  require('config/dbConnection.php');
+  $error = false;
   if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pwd'])) {
     if($_POST['username'] == $_POST['pwd']){
+      $numero_apogee = $_POST['username'];
 
+      $query = "SELECT * FROM etudiants where numero_apogee='".$numero_apogee."'";
+      $students = $conn->query($query);
+      
+      if($students->rowCount()>0){
+        session_start();
+        $_SESSION['connected']='connected';
+        $_SESSION['apogee'] = $_POST['apogee'];
+        $_SESSION['type'] = 'student';
+        header('Location: etudiant');
+      }
+      else{
+        $error = true;
+      }
+			// Fermer le curseur
+			$students->closeCursor();
     }
-    session_start();
-    $_SESSION['apogee'] = $_POST['apogee'];
-
   }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +46,9 @@
   <!-- Custom styles for this template-->
   <link href="sources/css/sb-admin.css" rel="stylesheet">
 
+  <!-- MyCss-->
+  <link href="sources/css/myCss.css" rel="stylesheet">
+
 </head>
 <body id="page-top">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top d-flex justify-content-between">
@@ -49,12 +66,14 @@
             <div class="form-label-group">
               <input name="username" type="text" id="username" class="form-control" placeholder="Username" required="required" autofocus="autofocus">
               <label for="username">Username</label>
+              <span <?php if($error) echo "hidden='hidden'"; ?> class="error">username incorrect</span>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
               <input name="pwd" type="password" id="pwd" class="form-control" placeholder="Password" required="required">
               <label for="pwd">Password</label>
+              <span <?php if($error) echo "hidden='hidden'"; ?> class="error">password incorrect</span>
             </div>
           </div>
           <input class="btn btn-primary btn-block" type="submit" name="login" value="login">
