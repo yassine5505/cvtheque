@@ -75,6 +75,14 @@ function listerOffres($conn){
 
 }
 
+//function that returns offres  de stage in array
+function listerEtudiants($conn){
+  $selectEtudiants = $conn->query("SELECT * FROM etudiants;");
+  if($selectEtudiants){
+    return $selectEtudiants;
+  }
+
+}
 
   //General functions
 //function that updates logo. called in ajouter entreprise
