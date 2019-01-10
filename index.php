@@ -1,13 +1,24 @@
+<pre>
 <?php
+  print_r($_POST);
+  if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pwd'])) {
+    if($_POST['username'] == $_POST['pwd']){
+      
+    }
+    session_start();
+    $_SESSION['apogee'] = $_POST['apogee'];
 
+  }
 ?>
+</pre>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>TITLE A MODIFIER</title>
+  <title>CVthèque - Login</title>
   
   <!-- Bootstrap core CSS-->
   <link href="sources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,15 +34,33 @@
 
 </head>
 <body id="page-top">
-  <?php   require('includes/topnav.php'); ?>
-  <div id="wrapper">
-    <div id="content-wrapper">
-      <div id="container-fluid">
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top d-flex justify-content-between">
+    <div class="navbar-brand-and-bars">
+      <a class="navbar-brand mr-1" href="index.php">CVthèque</a>
+    </div>
+  </nav>
 
-
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Login (par numéro Apogée)</div>
+      <div class="card-body">
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input name="username" type="text" id="username" class="form-control" placeholder="Username" required="required" autofocus="autofocus">
+              <label for="username">Username</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input name="pwd" type="password" id="pwd" class="form-control" placeholder="Password" required="required">
+              <label for="pwd">Password</label>
+            </div>
+          </div>
+          <input class="btn btn-primary btn-block" type="submit" name="login" value="login">
+        </form>
       </div>
     </div>
-
   </div>
 
   <!-- Bootstrap core JavaScript-->
