@@ -8,18 +8,29 @@
 * Afficher etudiants
 * Afficher liste offres
 **/
+DEFINE('DS',DIRECTORY_SEPARATOR);
 require('../config/dbConnection.php');
 // Prepared statements
   //Entreprise
+<<<<<<< HEAD
   $selectEntrepriseByNom = $conn->prepare("SELECT nom FROM entreprises where nom=:nom");
   $insertEntreprise = $conn->prepare("INSERT INTO logo(url,entreprise_id) values(:url,:entreprise)");
   $insertEntreprise = $conn->prepare("INSERT INTO entreprises(nom,adresse,phone) values (:nom,:adresse,:phone)");
   
   //End prepared statemtns
+=======
+//End prepared statemtns
+>>>>>>> 885194a09b86f8a16debb8339f7ac1dd35d3a09e
 
 
 // Admin functions
-function ajouterEntreprise($nom,$adresse,$phone){
+function ajouterEntreprise($nom,$adresse,$phone,$conn){
+  $selectEntrepriseByNom = $conn->prepare("SELECT nom FROM entreprises where nom=:nom");
+  $insertLogo = $conn->prepare("INSERT INTO logo(url,entreprise_id) values(:url,:entreprise)");
+  $insertEntreprise = $conn->prepare("INSERT INTO entreprises(nom,adresse,phone) values (:nom,:adresse,:phone)");
+  $updateEntreprise = $conn->prepare("update entreprises set logo = :logo");
+
+
   $selectEntrepriseByNom->bindParam(':nom',$nom);
   $selectEntrepriseByNom->execute();
   $rows = $selectEntrepriseByNom->rowCount();
@@ -28,36 +39,39 @@ function ajouterEntreprise($nom,$adresse,$phone){
     //first, insert logo in
     return false;
   }
-  else{ //aucune entreprise n'a ce nom
-    //inserer le nom, adresse,phone dans entreprises
+  else{
+    //inserer logo dans la table logos
+    $logo = uploadLogo();
+    //inserer dans entreprises
     $insertEntreprise->bindParam(':nom',$nom);
     $insertEntreprise->bindParam(':adresse',$adresse);
     $insertEntreprise->bindParam(':phone',$phone);
     $insertEntreprise->execute();
+    //update entreprise avec le path logo
+    $updateEntreprise->bindParam(':logo',$logo);
+    $updateEntreprise->execute();
+
     //insert logo
     return true;
   }
-
 }
 
-//General functions
-function uploadLogo($targetDir){
-  $target_dir = "logos/";
-  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-  $uploadOk = 1;
-  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-  // Check if image file is a actual image or fake image
-  if(isset($_POST["submit"])) {
-      $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-      if($check !== false) {
-          echo "File is an image - " . $check["mime"] . ".";
-          $uploadOk = 1;
-      } else {
-          echo "File is not an image.";
-          $uploadOk = 0;
-      }
-  }
+  //General functions
+//function that updates logo. called in ajouter entreprise
+function uploadLogo(){
+  $fileName = $_FILES['logo']['name'];
+  $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+  //echo $root;
+   $fullFileName = $root.DS."cvtheque".DS."assets".DS."logos".DS.$fileName;
+   move_uploaded_file($_FILES['logo']['tmp_name'],$fullFileName);
+   return $fileName;
 }
-
+//function that cleans user input
+function clean($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 
  ?>

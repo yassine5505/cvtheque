@@ -1,9 +1,15 @@
-<?php
-require('../config/dbConnection.php');
-require('../sources/lib.php');
 
- ?>
+  <?php
+  require '../config/dbConnection.php';
+  require '../sources/lib.php';
+    if(isset($_POST['submit']) && isset($_POST['nom']) && isset($_POST['phone']) && isset($_POST['adresse'])){
+    //submit form
 
+    ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),$conn);
+    uploadLogo();
+  }
+
+   ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +33,7 @@ require('../sources/lib.php');
         <?php   require('../includes/footer.php'); ?>
         <!--ADD CONTENT HERE-->
         <div class="card-body">
-        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -49,8 +55,7 @@ require('../sources/lib.php');
             <div class="form-row">
               <div class="col-md-12">
                 <div class="form-label-group">
-                  <textarea  name="adresse" id="adresse" class="form-control"  required="required"></textarea>
-                  <label for="adresse">Adresse</label>
+                  <textarea  name="adresse" id="adresse" class="form-control"  placeholder="Adresse de l'entreprise" required="required"></textarea>
                 </div>
               </div>
             </div>
@@ -60,7 +65,7 @@ require('../sources/lib.php');
             <input type="file" class="form-control-file" id="logo" name="logo">
           </div>
 
-          <button type="submit" name="submit" class="btn btn-primary btn-block">Ajouter entreprise</button>
+          <button type="submit" name="submit" class="btn btn-primary">Ajouter entreprise</button>
         </form>
       </div>
         <!--END CONTENT-->
