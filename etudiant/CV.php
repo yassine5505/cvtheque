@@ -4,6 +4,7 @@
         $numero_apogee = $_SESSION['apogee'];
         require('../config/dbConnection.php');
 
+        // selection des informations
         $query = "SELECT * FROM etudiants where numero_apogee='".$numero_apogee."'";
         $students = $conn->query($query);
         if($students->rowCount() == 1){
@@ -18,6 +19,15 @@
             }
             $apogee = $numero_apogee;
             $tele = $student['phone'];
+            $email = $student['email'];
+        }
+
+        // selection des langues
+        $query = "SELECT * FROM langues_etudiant where lower(numero_apogee)='".$numero_apogee."'";
+        
+        $languages = $conn->query($query);
+        if($languages->rowCount() >= 1){
+            $languagesExists = true;
         }
     }
 ?>
@@ -53,11 +63,23 @@
                                 <hr class="hr">
                                 <p class="apogee"><i class="fas fa-th-list"></i>  <?= $apogee ?><p>
                                 <p class="phone"><i class="fas fa-phone cv-icon-small"></i> <?= $tele ?><p>
-                                <p class="phone"><i class="fas fa-at"></i> mehdi.mc60@gmail.com<p>
+                                <p class="phone"><i class="fas fa-at"></i> <?= $email ?><p>
+                                
+                                <br>
+                                <i class="fas fa-language cv-icon"></i> <span class="cv-label">Langues :</span>
+                                <hr class="hr">
+                                <?php
+
+                                    while($language = $languages->fetch()){
+                                ?>
+                                    <p><?= $language['langue'] ?> : <?= $language['niveau'] ?></p>
+                                <?php        
+                                    }
+
+                                ?>
                             </div>
                             <div class="col-sm-7">
-                                <p class="apogee">Apogée : <?= $apogee ?><p>
-                                <p class="phone">Téléphone : <?= $tele ?><p>
+                                Heho
                             </div>
                         </div>
                     </div>
@@ -107,7 +129,7 @@
                     border-radius: 10%;
                 }
                 .cv-icon{
-                    font-size: 22px;
+                    font-size: 24px;
                 }
                 .cv-icon-small{
                     font-size: 18px;

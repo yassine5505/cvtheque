@@ -1,9 +1,13 @@
 
 <?php
   session_start();
+  session_destroy();
+  session_start();
+
   require('config/dbConnection.php');
   $error = false;
   if (isset($_POST['login']) && isset($_POST['username']) && isset($_POST['pwd'])) {
+    // Student
     if($_POST['username'] == $_POST['pwd']){
       $numero_apogee = $_POST['username'];
 
@@ -23,6 +27,49 @@
 			// Fermer le curseur
 			$students->closeCursor();
     }
+
+    // Entreprise
+    $username = $_POST['username'];
+    $password = $_POST['pwd'];
+
+    $query = "SELECT * FROM entreprises where nom='".$username."' and password='".$password."'";
+    $entreprises = $conn->query($query);
+
+    if($entreprises->rowCount()>0){
+      $error = false;
+      $_SESSION['connected']='connected';
+      $_SESSION['username'] = $_POST['username'];
+      $_SESSION['type'] = 'entreprise';
+      header('Location: entreprise/ajouterOffre.php');
+    }
+    else{
+      $error = true;
+    }
+    // Fermer le curseur
+    $entreprises->closeCursor();
+
+
+
+    // Admin
+    $username = $_POST['username'];
+    $password = $_POST['pwd'];
+
+    $query = "SELECT * FROM admins where username='".$username."' and password='".$password."'";
+    $admins = $conn->query($query);
+
+    if($admins->rowCount()>0){
+      $error = false;
+      $_SESSION['connected']='connected';
+      $_SESSION['username'] = $_POST['username'];
+      $_SESSION['type'] = 'admin';
+      header('Location: admin/ajouterEntreprise.php');
+    }
+    else{
+      $error = true;
+    }
+    // Fermer le curseur
+    $admins->closeCursor();
+
   }
 ?>
 
