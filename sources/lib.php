@@ -69,7 +69,7 @@ function listerEntreprises($conn){
 function listerOffres($conn){
   $selectOffres = $conn->query("SELECT * FROM offres inner join entreprises on offres.entreprise_id = entreprises.id");
 
-  if($selectEntreprises){
+  if($selectOffres){
     return $selectOffres;
   }
 
