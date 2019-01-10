@@ -5,7 +5,7 @@
     if(isset($_POST['submit']) && isset($_POST['nom']) && isset($_POST['phone']) && isset($_POST['adresse'])){
     //submit form
 
-    ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),$conn);
+    ajouterEntreprise(clean($_POST['nom']),clean($_POST['adresse']),clean($_POST['phone']),clean($_POST['description']),$conn);
     uploadLogo();
   }
 
@@ -53,9 +53,14 @@
 
           <div class="form-group">
             <div class="form-row">
-              <div class="col-md-12">
+              <div class="col-6">
                 <div class="form-label-group">
                   <textarea  name="adresse" id="adresse" class="form-control"  placeholder="Adresse de l'entreprise" required="required"></textarea>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-label-group">
+                  <textarea  name="description" id="description" class="form-control"  placeholder="Description de l'entreprise"></textarea>
                 </div>
               </div>
             </div>

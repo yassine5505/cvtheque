@@ -32,10 +32,18 @@
         <?php
           while($e = $entreprises->fetch()){
          ?>
-          <div class="card col col-lg-4"  style="width: 18rem;">
+          <div class="card col-lg-4 col-sm-12"  style="width: 18rem;">
             <img class="card-img-top" src="../assets/logos/<?= $e['logo']?>" alt="Card image cap">
             <div class="card-body">
-              <h5 class="card-title"><?= $e['nom']?></h5>
+              <div class="row">
+                <div class="col-6" style="display:inline;">
+                  <?= strtoupper( $e['nom']) ?>
+                </div>
+                <div class="col-6" style="display:inline;">
+                  <a href="#" class=" ml-4 btn btn-primary btn-sm fa fa-pen"></a>
+                </div>
+              </div>
+              <h5 class="card-title" style="display: inline;"></h5></a>
               <p class="card-text"><i class="fa fa-phone" style="color: grey;"></i>   <?= $e['phone']?></p>
               <p class="card-text"><i class="fa fa-home" style="color: grey;"></i>   <?= $e['adresse']?></p>
             </div>
