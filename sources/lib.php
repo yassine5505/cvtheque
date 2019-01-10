@@ -48,6 +48,9 @@ function ajouterEntreprise($nom,$adresse,$phone,$conn){
   }
 }
 
+//function that returns all entreprises in array
+
+
   //General functions
 //function that updates logo. called in ajouter entreprise
 function uploadLogo(){
