@@ -15,7 +15,7 @@
         $_SESSION['connected']='connected';
         $_SESSION['apogee'] = $_POST['username'];
         $_SESSION['type'] = 'student';
-        header('Location: etudiant/profil.php');
+        header('Location: etudiant/CV.php');
       }
       else{
         $error = true;

@@ -51,8 +51,9 @@
                             <div class="col-sm-5">
                                 <i class="fas fa-info-circle cv-icon"></i> <span class="cv-label">Informations :</span>
                                 <hr class="hr">
-                                <p class="apogee"><i class="fas fa-phone-square cv-icon-small"></i>  <?= $apogee ?><p>
-                                <p class="phone">Téléphone : <?= $tele ?><p>
+                                <p class="apogee"><i class="fas fa-th-list"></i>  <?= $apogee ?><p>
+                                <p class="phone"><i class="fas fa-phone cv-icon-small"></i> <?= $tele ?><p>
+                                <p class="phone"><i class="fas fa-at"></i> mehdi.mc60@gmail.com<p>
                             </div>
                             <div class="col-sm-7">
                                 <p class="apogee">Apogée : <?= $apogee ?><p>
@@ -107,6 +108,9 @@
                 }
                 .cv-icon{
                     font-size: 22px;
+                }
+                .cv-icon-small{
+                    font-size: 18px;
                 }
                 .cv-label{
                     font-size: 23px;
