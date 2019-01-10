@@ -1,5 +1,6 @@
 <?php
 require('../config/dbConnection.php');
+require('../config/lib.php');
  ?>
 
 
