@@ -2,9 +2,10 @@
 
 session_start();
 
+
 require '../config/dbConnection.php';
 require '../sources/lib.php';
-checkSession();
+checkSession("entreprise");
 /*********/
 $e ;
 $b1 = false;$b2 = false;

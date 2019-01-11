@@ -4,7 +4,7 @@
 
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-  checkSession();
+  checkSession("admin");
   if (isset($_GET['idEtudiant'])){
     $e = infoEtudiant($_GET['idEtudiant'],$conn)->fetch();
     // print_r($_POST)['submit'];

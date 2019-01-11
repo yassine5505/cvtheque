@@ -3,7 +3,7 @@
   session_start();
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-  checkSession();
+  checkSession("admin");
 
     if(isset($_POST['submit']) && isset($_POST['nom']) && isset($_POST['phone']) && isset($_POST['adresse'])){
     //submit form

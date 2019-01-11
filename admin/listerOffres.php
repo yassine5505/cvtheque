@@ -4,7 +4,7 @@
 
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-  checkSession();
+  checkSession("admin");
   $offres = listerOffres($conn);
   // while($o = $offres->fetch()){
   //     // print_r($o);

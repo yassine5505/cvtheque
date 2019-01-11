@@ -236,14 +236,11 @@ function clean($data) {
 
 //function that starts session and starts session and checks if the user has the privileges
 //this function should always be called first
-function checkSession(){
+function checkSession($type){
   //$type = user type : admin | entreprise | student
-  if(!isset($_SESSION['connected'])){
+  if(!isset($_SESSION['connected']) || $type != $_SESSION['type']){
     session_destroy();
     header("Location: ../index.php");
-  }
-  else{
-    if(isset($_SESSION['type'])) return $_SESSION['type'];
   }
 }
  ?>

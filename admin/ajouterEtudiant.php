@@ -4,7 +4,7 @@
 
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-  checkSession();
+  checkSession("admin");
     if(isset($_POST['submit']) && isset($_POST['apogee']) && isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['description'])){
     //submit form
     if(ajouterEtudiant(clean($_POST['apogee']),clean($_POST['nom']),clean($_POST['prenom']),clean($_POST['phone']),clean($_POST['email']),clean($_POST['description']),$conn)){

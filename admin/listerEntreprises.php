@@ -4,7 +4,7 @@
 
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-  checkSession();
+  checkSession("admin");
   $entreprises = listerEntreprises($conn);
 
    ?>
