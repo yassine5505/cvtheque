@@ -16,8 +16,6 @@
         require('../config/dbConnection.php');
 
 
-
-
         /*
         * selection des anciens informations
         */
@@ -67,7 +65,6 @@
 
 
 
-
         /*
         * modification (from modifierCV.php)
         */
@@ -83,31 +80,31 @@
             
 
 
-            // Langues
+            // Langues et niveau
             $i=0;
             while(isset($_POST['langue'][$i])){
                 $oldLangue = $oldLangues1->fetch();
                 $oldLang = $oldLangue['langue'];
 
                 $langue = clean($_POST['langue'][$i]);
-                $query = "UPDATE langues_etudiant set langue = '$langue' where langue ='$oldLang' and lower(numero_apogee)='$numero_apogee' ";
-                //echo $query."<br>";
-                $conn->query($query);
-                $i++;
-            }
-
-            // langues niveau
-            $i=0;
-            while(isset($_POST['langue-niveau'][$i])){
-                $oldLangue = $oldLangues2->fetch();
-                $oldLang = $oldLangue['langue'];
-
                 $langueniveau = clean($_POST['langue-niveau'][$i]);
-                $query = "UPDATE langues_etudiant set niveau = '$langueniveau' where langue ='$oldLang' and lower(numero_apogee)='$numero_apogee' ";
-                //echo $query."<br>";
-                $conn->query($query);
+
+                if($oldLang!="") {
+                    $query = "UPDATE langues_etudiant set langue = '$langue', niveau = '$langueniveau' where langue ='$oldLang' and lower(numero_apogee)='$numero_apogee' ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
+                else {
+                    $query = "INSERT INTO langues_etudiant(langue,niveau, numero_apogee) VALUES ('$langue','$langueniveau','$numero_apogee') ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
                 $i++;
             }
+
+            $query = "DELETE FROM langues_etudiant where langue ='' and lower(numero_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
 
 
 
@@ -121,11 +118,24 @@
 
                 $competence = clean($_POST['competence'][$i]);
                 $competenceniveau = clean($_POST['competence-niveau'][$i]);
-                $query = "UPDATE competences set competence = '$competence', niveau = '$competenceniveau' where competence = '$oldComp' and niveau = '$oldNiveau' and lower(apogee_etudiant)='$numero_apogee' ";
-                //echo $query."<br>";
-                $conn->query($query);
+
+                if($oldComp!="") {
+                    $query = "UPDATE competences set competence = '$competence', niveau = '$competenceniveau' where competence = '$oldComp' and niveau = '$oldNiveau' and lower(apogee_etudiant)='$numero_apogee' ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
+                else {
+                    $query = "INSERT INTO competences(competence,niveau, apogee_etudiant) VALUES ('$competence','$competenceniveau','$numero_apogee') ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
                 $i++;
             }
+
+            $query = "DELETE FROM competences where competence ='' and lower(apogee_etudiant)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
 
 
 
@@ -142,18 +152,30 @@
                 $titre = clean($_POST['diplome-titre'][$i]);
                 $ville = clean($_POST['diplome-ville'][$i]);
                 $description = clean($_POST['diplome-description'][$i]);
-                $query = "UPDATE diplomes_etudiant set annee = '$annee', titre = '$titre', ville = '$ville', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and ville = '$oldVille' and description = '$oldDescription' ";
-                //echo $query."<br>";
-                $conn->query($query);
+
+                if($oldDiplome!="") {
+                    $query = "UPDATE diplomes_etudiant set annee = '$annee', titre = '$titre', ville = '$ville', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and ville = '$oldVille' and description = '$oldDescription' ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
+                else{
+                    $query = "INSERT INTO diplomes_etudiant(annee,titre,ville,description,etudiant_apogee) VALUES('$annee','$titre','$ville','$description','$numero_apogee')";
+                    //echo $query."<br>";
+                    $conn->query($query);
+
+                }
                 $i++;
             }
+
+            $query = "DELETE FROM diplomes_etudiant where (annee ='' or titre ='' or ville ='' ) and lower(etudiant_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
 
 
 
             // Experiences
             $i=0;
             while(isset($_POST['experience-annee'][$i]) && isset($_POST['experience-titre'][$i]) && isset($_POST['experience-sous-domaine'][$i]) && isset($_POST['experience-description'][$i])){
-                
                 $oldExperience = $oldExperiences->fetch();
                 $oldAnnee = $oldExperience['annee'];
                 $oldTitre = $oldExperience['titre'];
@@ -164,10 +186,40 @@
                 $titre = clean($_POST['experience-titre'][$i]);
                 $sous_domaine = clean($_POST['experience-sous-domaine'][$i]);
                 $description = clean($_POST['experience-description'][$i]);
-                $query = "UPDATE experiences_etudiant set annee = '$annee', titre = '$titre', sous_domaine = '$sous_domaine', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and sous_domaine = '$oldSousDomaine' and description = '$oldDescription' ";
-                //echo $query."<br>";
-                $conn->query($query);
+
+                if($oldExperience!="") {
+                    $query = "UPDATE experiences_etudiant set annee = '$annee', titre = '$titre', sous_domaine = '$sous_domaine', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and sous_domaine = '$oldSousDomaine' and description = '$oldDescription' ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
+                else{
+                    $query = "INSERT INTO experiences_etudiant(annee,titre,sous_domaine,description,etudiant_apogee) VALUES('$annee','$titre','$sous_domaine','$description','$numero_apogee')";
+                    //echo $query."<br>";
+                    $conn->query($query);
+
+                }
                 $i++;
+            }
+
+            $query = "DELETE FROM experiences_etudiant where (annee ='' or titre ='' or sous_domaine ='' ) and lower(etudiant_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
+            /**
+             * modifier video
+             */
+            if(isset($_FILES['video'])){
+                $fileName = $_FILES['video']['name'];
+                if($fileName!=""){
+                    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+                    //echo $root;
+                    $fullFileName = $root."/cvtheque/assets/cvVideo/".$fileName;
+                    move_uploaded_file($_FILES['video']['tmp_name'],$fullFileName);
+    
+                    $query = "UPDATE etudiants set video = '$fileName' where lower(numero_apogee)='$numero_apogee' ";
+                    //echo $query."<br>";
+                    $conn->query($query);
+                }
             }
 
         }
