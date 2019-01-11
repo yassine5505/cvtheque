@@ -2,7 +2,7 @@
   <?php if (isset($_SESSION['connected']) && isset($_SESSION['type']) && $_SESSION['type'] == 'admin'){
     ?>
     <li class="nav-item active">
-      <a class="nav-link" href="ajouterEtudiant.php">
+      <a class="nav-link" href="ajouterEntreprise.php">
         <i class="fas fa-industry"></i>
         <span>Nouvelle Entreprise</span>
       </a>
