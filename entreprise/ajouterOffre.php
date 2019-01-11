@@ -1,12 +1,52 @@
 <?php
+
+session_start();
+
 require '../config/dbConnection.php';
 require '../sources/lib.php';
+/*********/
+$e ;
+$b1 = false;$b2 = false;
+if(isset($_SESSION['username'])){
+//info entreprise
+  $e = infoEntreprise($_SESSION['username'],$conn);
+  $entrepriseId = $e->fetch()['id'];
 
-/**offre
-*intitule
-*competences
-*duree
-**/
+}
+else{
+  //not connected as entreprise
+  //destroy session and redirect
+  session_destory();
+  header("Location: ../index.php");
+}
+/********/
+if(isset($_POST['submit'])){
+  if(isset($_POST['intitule']) && isset($_POST['duree'])){
+    $b1=ajouterOffre(clean($_POST['intitule']),clean($_POST['duree']),$entrepriseId,$conn);
+  }
+  for ($i=1; $i < 6; $i++) {
+    if(isset($_POST['competence'.$i]) && "" != trim($_POST['competence'.$i])){
+      $o = infoOffre($_POST['intitule'],$_POST['duree'],$conn);
+      $idOffre = $o->fetch()['id'];
+    $b2=ajouterCompetenceRequise(clean($_POST['competence'.$i]),$idOffre,$conn);
+    }
+  }
+  if($b1 && $b2){
+    echo "
+      <script>
+        alert('Offre ajoutée avec succès !');
+      </script>
+    ";
+  }
+  else{
+    echo "
+      <script>
+        alert('L'offre n'a pas été ajoutée. Veuillez réessayer !');
+      </script>
+    ";
+  }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +82,7 @@ require '../sources/lib.php';
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="number" min="0" max="20" name="duree" id="duree" class="form-control" placeholder="Durée du stage (en mois)" required="required" autofocus="autofocus">
+                  <input type="number" min="1"  name="duree" id="duree" class="form-control" placeholder="Durée du stage (en mois)" required="required" autofocus="autofocus">
                   <label for="duree">Durée en mois</label>
                 </div>
               </div>
@@ -52,7 +92,7 @@ require '../sources/lib.php';
             <div class="form-row ">
               <div class="col-md-12">
                 <div class="form-label-group">
-                  <input type="text" name="competence1" id="competence1" class="form-control" placeholder="Exemple: développment web">
+                  <input type="text" name="competence1" class="form-control comp" id="competence1" placeholder="Exemple: développment web">
                   <label for="competence1">Compétence 1</label>
                 </div>
               </div>
@@ -62,7 +102,7 @@ require '../sources/lib.php';
             <div class="form-row ">
               <div class="col-md-12">
                 <div class="form-label-group">
-                    <input type="text" name="competence2" id="competence2" class="form-control" placeholder="Exemple: développment web">
+                    <input type="text" name="competence2" class="form-control comp" id="competence2" placeholder="Exemple: développment web">
                     <label for="competence2">Compétence 2</label>
                 </div>
               </div>
@@ -72,7 +112,7 @@ require '../sources/lib.php';
             <div class="form-row ">
               <div class="col-md-12">
                 <div class="form-label-group">
-                    <input type="text" name="competence3" id="competence3" class="form-control" placeholder="Exemple: développment web">
+                    <input type="text" name="competence3" class="form-control comp" id="competence3" placeholder="Exemple: développment web">
                     <label for="competence3">Compétence 3</label>
                 </div>
               </div>
@@ -82,7 +122,7 @@ require '../sources/lib.php';
             <div class="form-row ">
               <div class="col-md-12">
                 <div class="form-label-group">
-                    <input type="text" name="competence4" id="competence4" class="form-control" placeholder="Exemple: développment web">
+                    <input type="text" name="competence4" class="form-control comp" id="competence4" placeholder="Exemple: développment web">
                     <label for="competence4">Compétence 4</label>
                 </div>
               </div>
@@ -92,7 +132,7 @@ require '../sources/lib.php';
             <div class="form-row ">
               <div class="col-md-12">
                 <div class="form-label-group">
-                    <input type="text" name="competence5" id="competence5" class="form-control" placeholder="Exemple: développment web">
+                    <input type="text" name="competence5" class="form-control comp" id="competence5" placeholder="Exemple: développment web">
                     <label for="competence5">Compétence 5</label>
                 </div>
               </div>
@@ -100,7 +140,7 @@ require '../sources/lib.php';
           </div>
           <button type="button" id="addCompetence" class="btn btn-primary" ><i class="fa fa-plus"></i></button>
 
-          <button type="submit" name="submit" class="btn btn-primary">Ajouter offre</button>
+          <button type="submit" name="submit" class="btn btn-primary" id="submit">Ajouter offre</button>
         </form>
       </div>
         <!--END CONTENT-->
@@ -118,9 +158,9 @@ require '../sources/lib.php';
       if(i<6){
         var j = ++i;
         var compI = "compContainer"+j;
-        console.log(compI);
+        //console.log(compI);
         var compContainer = document.getElementById(compI);
-        console.log(compContainer.getAttribute('hidden'));
+        //console.log(compContainer.getAttribute('hidden'));
         if(compContainer.getAttribute('hidden') == "true"){
           compContainer.removeAttribute('hidden');
         }
@@ -129,6 +169,16 @@ require '../sources/lib.php';
         document.getElementById('addCompetence').setAttribute('hidden','true');
       }
     }
+  </script>
+  <script type="text/javascript">
+    // $('#addCompetence').click(function(){
+    //       $('.comp').each(function(){
+    //     console.log($(this).val());  // Or this.innerHT$(this).val()ML, this.innerText
+    //     });
+    //
+    // })
+
+
   </script>
 </body>
 </html>

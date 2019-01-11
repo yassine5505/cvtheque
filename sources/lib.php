@@ -108,6 +108,28 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
   }
 }
 
+function ajouterOffre($intitule,$duree,$entreprise_id,$conn){
+  //inserer offre sans competences
+  $insertOffre = $conn->prepare("INSERT INTO offres (intitule,duree,entreprise_id) VALUES(:intitule,:duree,:entreprise_id)");
+  $insertOffre->bindParam(':intitule',$intitule);
+  $insertOffre->bindParam(':duree',$duree);
+  $insertOffre->bindParam(':entreprise_id',$entreprise_id);
+  $insertOffre->execute();
+  if($insertOffre) return true;
+  return false;
+}
+
+//function that inserts competence
+function ajouterCompetenceRequise($competence,$offre_id,$conn){
+  $insertCompetence = $conn->prepare("INSERT INTO competences_requises(competence,offre_id) VALUES(:competence,:offre_id);");
+  $insertCompetence->bindParam(':competence',$competence);
+  $insertCompetence->bindParam(':offre_id',$offre_id);
+  $insertCompetence->execute();
+  if($insertCompetence){
+    return true;
+  }
+  return false;
+}
 //function that modifies entreprise based on nom
 function modifierEtudiant($id,$nom,$prenom,$phone,$description,$conn){
   $updateEtudiant = $conn->prepare("UPDATE etudiants set nom=:nom,prenom=:prenom,phone=:phone,description=:description where id=:id");
@@ -174,6 +196,14 @@ function infoEtudiant($id,$conn){
   }
 }
 
+//function that returns info about offre de stage
+function infoOffre($intitule,$duree,$conn){
+  $selectOffre = $conn->prepare("SELECT * FROM offres where intitule=:intitule and duree=:duree limit 1");
+  $selectOffre->bindValue(':intitule',$intitule,PDO::PARAM_STR);
+  $selectOffre->bindValue(':duree',$duree,PDO::PARAM_STR);
+  $selectOffre->execute();
+  return $selectOffre;
+}
   //General functions
 //function that updates logo. called in ajouter entreprise
 function uploadLogo(){
