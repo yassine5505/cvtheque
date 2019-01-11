@@ -59,6 +59,12 @@
         <span class="menu-label"> Modifier mon CV</span>
       </a>
     </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="index.php">
+        <i class="fas fa-list"></i>
+        <span class="menu-label"> Liste des offres</span>
+      </a>
+    </li>
   <?php } ?>
 </ul>
 

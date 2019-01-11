@@ -1,14 +1,20 @@
--- phpMyAdmin SQL Dump
--- version 4.7.7
+﻿-- phpMyAdmin SQL Dump
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 11, 2019 at 03:09 PM
--- Server version: 5.6.38
--- PHP Version: 7.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Jan 11, 2019 at 07:19 PM
+-- Server version: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `cvtheque`
@@ -33,6 +39,35 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `username`, `password`) VALUES
 (1, 'admin', 'admin'),
 (2, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `candidatures`
+--
+
+CREATE TABLE `candidatures` (
+  `id` int(11) NOT NULL,
+  `etudiant_id` int(11) DEFAULT NULL,
+  `offre_id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `candidatures`
+--
+
+INSERT INTO `candidatures` (`id`, `etudiant_id`, `offre_id`) VALUES
+(1, 5, 3),
+(2, 5, 3),
+(3, 5, 3),
+(4, 5, 3),
+(5, 5, 3),
+(6, 5, 3),
+(7, 5, 3),
+(8, 5, 3),
+(9, 5, 3),
+(10, 5, 3),
+(11, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -67,13 +102,20 @@ CREATE TABLE `competences_requises` (
   `offre_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `competences_requises`
+--
+
+INSERT INTO `competences_requises` (`id`, `competence`, `offre_id`) VALUES
+(1, 'Catia', 3);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Diplomes_etudiant`
+-- Table structure for table `diplomes_etudiant`
 --
 
-CREATE TABLE `Diplomes_etudiant` (
+CREATE TABLE `diplomes_etudiant` (
   `id` int(11) NOT NULL,
   `etudiant_apogee` varchar(20) NOT NULL,
   `titre` varchar(20) NOT NULL,
@@ -83,10 +125,10 @@ CREATE TABLE `Diplomes_etudiant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `Diplomes_etudiant`
+-- Dumping data for table `diplomes_etudiant`
 --
 
-INSERT INTO `Diplomes_etudiant` (`id`, `etudiant_apogee`, `titre`, `ville`, `annee`, `description`) VALUES
+INSERT INTO `diplomes_etudiant` (`id`, `etudiant_apogee`, `titre`, `ville`, `annee`, `description`) VALUES
 (1, 'Saad', 'Bac-99', 'naouz', '1018', 'Baccalauréat-99'),
 (2, 'Saad', 'Bac-99', 'naouz', '1018', 'Baccalauréat-99');
 
@@ -113,7 +155,8 @@ CREATE TABLE `entreprises` (
 INSERT INTO `entreprises` (`id`, `nom`, `adresse`, `phone`, `description`, `logo`, `password`) VALUES
 (14, 'Ensa tanger', 'Tanger', '053744552233', 'Ecole ingenieurs', 'New Logo ENSA HD.png', NULL),
 (13, 'Capgemini', 'Technopark, Casablanca', '0537887744', 'IT', 'CapGemini-logo-carre.png', NULL),
-(12, 'Atos', 'Technopark, Rabat', '0533222211', 'Spécialisée dans IT.', 'Atos-logo-880x660.png', 'Atoss');
+(12, 'Atos', 'Technopark, Rabat', '0533222211', 'Spécialisée dans IT.', 'Atos-logo-880x660.png', 'Atoss'),
+(15, 'Ã©', 'Ã©', 'Ã©', 'Ã©', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,8 +229,8 @@ CREATE TABLE `langues_etudiant` (
 --
 
 INSERT INTO `langues_etudiant` (`id`, `numero_apogee`, `langue`, `niveau`) VALUES
-(1, 'Saad', 'english', 'B99'),
-(2, 'Saad', 'english', 'B99');
+(1, 'Saad', 'français', 'B99'),
+(2, 'Saad', 'français', 'B99');
 
 -- --------------------------------------------------------
 
@@ -208,7 +251,8 @@ CREATE TABLE `offres` (
 
 INSERT INTO `offres` (`id`, `entreprise_id`, `intitule`, `duree`) VALUES
 (1, 6, 'Offre de stage bac +3', '2 mois'),
-(2, 7, 'Offre de stage en developpement', '3 mois');
+(2, 7, 'Offre de stage en developpement', '3 mois'),
+(3, 12, 'Stage supply chain', '2');
 
 --
 -- Indexes for dumped tables
@@ -218,6 +262,12 @@ INSERT INTO `offres` (`id`, `entreprise_id`, `intitule`, `duree`) VALUES
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `candidatures`
+--
+ALTER TABLE `candidatures`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -233,9 +283,9 @@ ALTER TABLE `competences_requises`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Diplomes_etudiant`
+-- Indexes for table `diplomes_etudiant`
 --
-ALTER TABLE `Diplomes_etudiant`
+ALTER TABLE `diplomes_etudiant`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -278,51 +328,51 @@ ALTER TABLE `offres`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+--
+-- AUTO_INCREMENT for table `candidatures`
+--
+ALTER TABLE `candidatures`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `competences`
 --
 ALTER TABLE `competences`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `competences_requises`
 --
 ALTER TABLE `competences_requises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `Diplomes_etudiant`
+-- AUTO_INCREMENT for table `diplomes_etudiant`
 --
-ALTER TABLE `Diplomes_etudiant`
+ALTER TABLE `diplomes_etudiant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `entreprises`
 --
 ALTER TABLE `entreprises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `etudiants`
 --
 ALTER TABLE `etudiants`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `experiences_etudiant`
 --
 ALTER TABLE `experiences_etudiant`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `langues_etudiant`
 --
 ALTER TABLE `langues_etudiant`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT for table `offres`
 --
 ALTER TABLE `offres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -71,7 +71,7 @@ if(isset($_POST['submit'])){
 
           <!--RESULTS START -->
             <?php
-              if($v){
+              if(isset($v)){
                 $i =0;
                 while($a = $v->fetch()){ if($i%3==0){?>
                   <div class="row">
@@ -95,7 +95,7 @@ if(isset($_POST['submit'])){
                           </li>
                         </ul>
                         <div class="card-footer text-muted">
-                          <a href="#" class="btn btn-block btn-primary"><i class="fa fa-play"></i>         Postuler</a>
+                          <a href="postulerOffre.php?idOffre=<?= $a['offre_id'] ?>" class="btn btn-block btn-primary"><i class="fa fa-play"></i>         Postuler</a>
                         </div>
                       </div>
                   </div>
@@ -121,7 +121,7 @@ if(isset($_POST['submit'])){
                     </li>
                   </ul>
                   <div class="card-footer text-muted">
-                    <a href="#" class="btn btn-block btn-primary"><i class="fa fa-play"></i>         Postuler</a>
+                    <a href="postulerOffre.php?idOffre=<?= $a['offre_id'] ?>" class="btn btn-block btn-primary"><i class="fa fa-play"></i>         Postuler</a>
                   </div>
                 </div>
             </div>
