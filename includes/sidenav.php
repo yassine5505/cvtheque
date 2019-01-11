@@ -53,8 +53,14 @@
     </li>
     <li class="nav-item active">
       <a class="nav-link" href="listerCvs.php">
+        <i class="fas fa-search"></i>
+        <span class="menu-label"> Rechercher les CV</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="listerCandidatures.php">
         <i class="fas fa-list"></i>
-        <span class="menu-label"> Candidatures</span>
+        <span class="menu-label"> Voir les candidatures</span>
       </a>
     </li>
   <?php } ?>
