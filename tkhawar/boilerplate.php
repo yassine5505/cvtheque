@@ -17,7 +17,8 @@
       <div id="container-fluid">
 
         <?php   require('../includes/footer.php'); ?>
-
+        <!-- CONTENT START-->
+        <!-- CONTENT END-->
       </div>
     </div>
 

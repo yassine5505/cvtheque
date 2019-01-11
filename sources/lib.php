@@ -174,8 +174,43 @@ function listerOffres($conn){
   if($selectOffres){
     return $selectOffres;
   }
-
 }
+
+//function that filters offres
+function filterOffres($competence, $duree, $nomEntreprise,$conn){
+  $competence = strtolower($competence);
+  $duree = strtolower($duree);
+  $nomEntreprise = strtolower($nomEntreprise);
+
+  // $selectOffres = $conn->prepare("SELECT * FROM offres inner JOIN entreprises on offres.entreprise_id=entreprise.id where entreprise.nom like :nomEntreprise or offres.initule like :intitule or offres.duree like :duree");
+  $query ="SELECT *,offres.id as offre_id FROM offres,entreprises,competences_requises where offres.entreprise_id=entreprises.id and offres.id=competences_requises.offre_id ";
+  if("" != $nomEntreprise){
+    $query.= " and lower(entreprises.nom) LIKE '%$nomEntreprise%' ";
+  }
+  else if("" != $competence){
+    $query .= " and lower(competences_requises.competence) like '%$competence%' ";
+  }
+  else if("" != $duree){
+    $query .= " and offres.duree like '%$duree%' ";
+  }
+  $selectOffres = $conn->query($query);
+  if($selectOffres) return $selectOffres;
+  else if($selectOffres->rowCount() == 0){
+    return false;
+  }
+}
+
+// function that lists competences from a given offres
+function listerCompetences($id,$conn){
+  $selectCompetences = $conn->prepare("SELECT * FROM competences_requises WHERE offre_id = :id");
+  $selectCompetences -> bindParam(':id',$id);
+  $selectCompetences->execute();
+  if($selectCompetences){
+    return $selectCompetences;
+  }
+  return false;
+}
+
 
 //function that returns offres  de stage in array
 function listerEtudiants($conn){
@@ -185,6 +220,7 @@ function listerEtudiants($conn){
   }
 
 }
+
 
 // function that returns etudiant info based on numero_apgogee
 function infoEtudiant($id,$conn){
