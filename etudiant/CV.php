@@ -206,7 +206,7 @@
                         }
                     ?>
                     </div>
-                    <a class="modify" href="modifierProfil.php"><button type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
+                    <a class="modify" href="modifierCV.php"><button type="button" class="btn btn-primary"><i class="fas fa-pen"></i></button></a>
                 </div>
             </div>
             <style>

@@ -1,2 +1,2 @@
 <?php
-echo "Etudiant";
+echo "Index Etudiant";
