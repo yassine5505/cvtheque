@@ -40,6 +40,12 @@
       </a>
     </li>
     <li class="nav-item active">
+      <a class="nav-link" href="modifierProfil.php">
+        <i class="fas fa-edit"></i>
+        <span class="menu-label"> Modifier mon profil</span>
+      </a>
+    </li>
+    <li class="nav-item active">
       <a class="nav-link" href="ajouterOffre.php">
         <i class="fas fa-bell"></i>
         <span class="menu-label"> Ajouter une offre</span>

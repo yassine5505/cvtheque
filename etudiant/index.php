@@ -72,9 +72,12 @@ if(isset($_POST['submit'])){
           <!--RESULTS START -->
             <?php
               if(isset($v)){
-                $i =0;
-                while($a = $v->fetch()){ if($i%3==0){?>
-                  <div class="row">
+                ?>
+                <div class="card-deck">
+
+
+                <?php
+                while($a = $v->fetch()){ ?>
                     <div class="col-4">
                       <div class="card mb-3 mx-3">
                         <h3 class="card-header"><?= $a['nom']?></h3>
@@ -99,33 +102,9 @@ if(isset($_POST['submit'])){
                         </div>
                       </div>
                   </div>
-                </div>
-            <?php  } else{ ?>
-              <div class="col-4">
-                <div class="card mb-3 mx-3">
-                  <h3 class="card-header"><?= $a['nom']?></h3>
-                  <div class="card-body">
-                    <h5 class="card-title"><?= $a['intitule'] ?></h5>
-                  </div>
-                  <img style="height: 200px; width: 100%; display: block;" src="../assets/logos/<?= $a['logo'] ?>" alt="Card image">
-                  <div class="card-body">
-                    <p class="card-text"></p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="fa fa-calendar"></i>       <?= $a['duree'] . " mois"?></li>
-                    <li class="list-group-item"><i class="fa fa-map"></i>       <?= $a['adresse']?></li>
-                    <li class="list-group-item">
-                    <?php $co = listerCompetences($a['offre_id'],$conn);while($c=$co->fetch()){ ?>
-                      <span class="badge badge-pill badge-dark"><?= "#".strtoupper($c['competence'])?></span>
-                    <?php }//end while competece ?>
-                    </li>
-                  </ul>
-                  <div class="card-footer text-muted">
-                    <a href="postulerOffre.php?idOffre=<?= $a['offre_id'] ?>" class="btn btn-block btn-primary"><i class="fa fa-play"></i>         Postuler</a>
-                  </div>
-                </div>
-            </div>
-          <?php }$i++;}  }else{ ?>
+              <?php } ?>
+              </div>
+            <?php }else{ ?>
             <div class="row mx-5 my-5">
               <p>Pas de résultats à afficher.</p>
             </div>
