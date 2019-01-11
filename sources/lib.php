@@ -230,14 +230,33 @@ function listerEtudiants($conn){
 
 }
 
+//function that checks if etudiant has already applied to offre
+function etudiantPeutPostuler($idEtudiant,$idOffre,$conn){
+  $selectCandidature = $conn->prepare("SELECT * FROM candidatures where etudiant_id=:etudiant_id and offre_id=:offre_id;");
+  $selectCandidature->bindParam(':etudiant_id',$idEtudiant);
+  $selectCandidature->bindParam(':offre_id',$idOffre);
+  if($selectCandidature && $selectCandidature->rowCount() == 0){
+    return false;
+  }
+  else{
+    return true;
+  }
+
+}
 //function that adds candidature
 function ajouterCandidature($idEtudiant,$idOffre,$conn){
-  $insertCandidature = $conn->prepare("INSERT INTO candidatures(etudiant_id,offre_id) VALUES(:idEtudiant,:idOffre)");
-  $insertCandidature->bindParam(':idEtudiant',$idEtudiant);
-  $insertCandidature->bindParam(':idOffre',$idOffre);
-  $insertCandidature->execute();
-  if($insertCandidature) return true;
-  return false;
+  if(etudiantPeutPostuler($idEtudiant,$idOffre,$conn)){
+    $insertCandidature = $conn->prepare("INSERT INTO candidatures(etudiant_id,offre_id) VALUES(:idEtudiant,:idOffre)");
+    $insertCandidature->bindParam(':idEtudiant',$idEtudiant);
+    $insertCandidature->bindParam(':idOffre',$idOffre);
+    $insertCandidature->execute();
+    if($insertCandidature) return true;
+    return false;
+  }
+  else{
+    return false;
+  }
+
 }
 
 // function that returns etudiant info based on numero_apgogee

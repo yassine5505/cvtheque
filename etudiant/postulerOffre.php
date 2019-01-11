@@ -11,10 +11,18 @@ if(isset($_GET['idOffre'])) {
 $idEtudiant = infoEtudiantByApogee($_SESSION['apogee'],$conn)->fetch()['id'];
 $o = listerOffresById($idOffre,$conn)->fetch();
 $c = listerCompetences($idOffre,$conn);
+echo $p=etudiantPeutPostuler($idEtudiant,$idOffre,$conn);
 if(isset($_POST['submit'])){
+
   if(ajouterCandidature($idEtudiant,$idOffre,$conn)){
     echo "
       <script>alert('Votre candidature a été insérée.');location.href = 'CV.php';</script>
+
+    ";
+  }
+  else{
+    echo "
+      <script>alert('Vous avez deja postulé pour cette offre.');location.href = 'CV.php';</script>
 
     ";
   }
