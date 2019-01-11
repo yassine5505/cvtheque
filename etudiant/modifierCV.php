@@ -15,7 +15,7 @@
             $description = $student['description'];
 
             $imgPath = "../assets/imageprofil/".$student['image'];
-            if(!file_exists($imgPath)){
+            if(!file_exists($imgPath) || $student['image']==null || $student['image']==""){
                 $imgPath = "../assets/imageprofil/man.svg";
             }
 
@@ -69,9 +69,12 @@
                 <form class="form-modifier" action="CV.php" method="post">
                     <div class="card">
                         <div class="card-body profile-header">
-                            <h5 class="name"><?= $nom ?> <?= $prenom ?><h5>
+                            <h5 class="name"><?= $nom ?> <?= $prenom ?></h5>
                             <img class="tof" width="130" src="<?=$imgPath?>" alt="">
-                            <p class="desc"><?= $description ?><p>
+                            <div class="form-label-group desc-group">
+                                <input type="text"  name="desc" id="desc" value="<?= $description ?>" class="form-control" placeholder="description" required="required">
+                                <label id="desc-label" for="desc">description </label>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="row">
@@ -79,8 +82,14 @@
                                     <i class="fas fa-info-circle cv-icon"></i> <span class="cv-label">Informations :</span>
                                     <hr class="hr">
                                     <p class="apogee"><i class="fas fa-th-list"></i>  <?= $apogee ?><p>
-                                    <p class="phone"><i class="fas fa-phone cv-icon-small"></i> <?= $tele ?><p>
-                                    <p class="phone"><i class="fas fa-at"></i> <?= $email ?><p>
+
+                                    <div class="form-group phone-group">
+                                        <i class="fas fa-phone cv-icon-small"></i><input type="text"  name="phone" id="phone" value="<?= $tele ?>" class="form-control" placeholder="phone" required="required">
+                                    </div>
+
+                                    <div class="form-group email-group">
+                                        <i class="fas fa-at"></i><input type="text"  name="email" id="email" value="<?= $email ?>" class="form-control" placeholder="email" required="required">
+                                    </div>
                                     
                                     <br>
                                     <i class="fas fa-language cv-icon-lang"></i> <span class="cv-label">Langues :</span>
@@ -90,7 +99,11 @@
                                         while($language = $languages->fetch()){
                                             $langExists=true;
                                     ?>
-                                        <p><strong><?= $language['langue'] ?> : </strong>  <?= $language['niveau'] ?></p>
+
+                                        <div class="form-group langue-group">
+                                            <input type="text"  name="langue" id="langue" value="<?= $language['langue'] ?>" class="form-control" placeholder="langue" required="required">
+                                            <input type="text"  name="langue-niveau" id="langue-niveau" value="<?= $language['niveau'] ?>" class="form-control" placeholder="niveau" required="required">
+                                        </div>
                                     <?php        
                                         }
                                         if(!$langExists) {
@@ -108,7 +121,11 @@
                                         while($competence = $competences->fetch()){
                                             $compExists=true;
                                     ?>
-                                        <p><strong><?= $competence['competence'] ?> :</strong> <?= $competence['niveau'] ?></p>
+
+                                        <div class="form-group competence-group">
+                                            <input type="text"  name="competence" id="competence" value="<?= $competence['competence'] ?>" class="form-control" placeholder="competence" required="required">
+                                            <input type="text"  name="competence-niveau" id="competence-niveau" value="<?= $competence['niveau'] ?>" class="form-control" placeholder="niveau" required="required">
+                                        </div>
                                     <?php        
                                         }
                                         if(!$compExists) {
@@ -128,19 +145,15 @@
                                             $dipExists=true;
                                     ?>
                                         <div class="row">
-                                            <div class="col-sm-3 diplome-annee">
-                                                <?= $diplome['annee'] ?>
-                                            </div>
-                                            <div class="col-sm-9 diplome-titre">
-                                                <?= $diplome['titre'] ?>
+                                            <div class="form-group ">
+                                                <input type="text"  name="diplome-annee" id="diplome-annee" value="<?= $diplome['annee'] ?>" class="form-control" placeholder="Annee" required="required">
+                                                <input type="text"  name="diplome-titre" id="diplome-titre" value="<?= $diplome['titre'] ?>" class="form-control" placeholder="Titre" required="required">
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-3 diplome-ville">
-                                                <?= $diplome['ville'] ?>
-                                            </div>
-                                            <div class="col-sm-9 diplome-description">
-                                                <?= $diplome['description'] ?>
+                                            <div class="form-group ">
+                                                <input type="text"  name="diplome-ville" id="diplome-ville" value="<?= $diplome['ville'] ?>" class="form-control" placeholder="Ville" required="required">
+                                                <input type="text"  name="diplome-description" id="diplome-description" value="<?= $diplome['description'] ?>" class="form-control" placeholder="Description" required="required">
                                             </div>
                                         </div>
                                         <br>
@@ -161,19 +174,15 @@
                                             $expExists=true;
                                     ?>
                                         <div class="row">
-                                            <div class="col-sm-3 experience-annee">
-                                                <?= $experience['annee'] ?>
-                                            </div>
-                                            <div class="col-sm-9 experience-titre">
-                                                <?= $experience['titre'] ?>
+                                            <div class="form-group ">
+                                                <input type="text"  name="experience-annee" id="experience-annee" value="<?= $experience['annee'] ?>" class="form-control" placeholder="Annee" required="required">
+                                                <input type="text"  name="experience-titre" id="experience-titre" value="<?= $experience['titre'] ?>" class="form-control" placeholder="Titre" required="required">
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-3 experience-sous_domaine">
-                                                <?= $experience['sous_domaine'] ?>
-                                            </div>
-                                            <div class="col-sm-9 experience-description">
-                                                <?= $experience['description'] ?>
+                                            <div class="form-group ">
+                                                <input type="text"  name="experience-sous-domaine" id="experience-sous-domaine" value="<?= $experience['sous_domaine'] ?>" class="form-control" placeholder="Sous domaine" required="required">
+                                                <input type="text"  name="experience-description" id="experience-description" value="<?= $experience['description'] ?>" class="form-control" placeholder="Description" required="required">
                                             </div>
                                         </div>
                                         <br>
@@ -190,7 +199,7 @@
                         </div>
 
                         <div class="card-body profile-footer">
-                                <h5 class="cv-video-name">CV Video<h5>
+                                <h5 class="cv-video-name">CV Video</h5>
                         <?php
                             if($vidPath==""){
                         ?>
@@ -234,33 +243,6 @@
                     margin-right: auto;
                     display: block;
                 }
-                .diplome-annee{
-                    text-align: right;
-                    color: rgba(0, 0, 0, 0.575);
-                }
-                .diplome-ville{
-                    text-align: right;
-                    color: rgb(15, 64, 156);
-                }
-                .diplome-titre{
-                    font-weight: bold;
-                }
-                .diplome-description{
-                }
-
-                .experience-annee{
-                    text-align: right;
-                    color: rgba(0, 0, 0, 0.575);
-                }
-                .experience-sous_domaine{
-                    text-align: right;
-                    color: rgb(15, 64, 156);
-                }
-                .experience-titre{
-                    font-weight: bold;
-                }
-                .experience-description{
-                }
                 .profile{
                     margin-top: 80px;
                 }
@@ -302,13 +284,9 @@
                     color: white;
                     text-align: center;
                 }
-                .desc{
-                    padding-top: 20px;
-                    padding-bottom: 40px;
-                    color: white;
-                    text-align: center;
-                }
+                
                 .tof{
+                    margin-bottom: 30px;
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
@@ -330,6 +308,151 @@
                 .hr{
                     border-top: 2px solid rgb(68, 68, 64);
                 }
+
+
+
+
+                #desc{
+                    width: 80%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: white;
+                }
+                #desc-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+                .desc-group{
+                    margin-left: 20%;
+                    margin-bottom: 20px;
+                }
+                #phone{
+                    display: inline;
+                    margin-left: 10px;
+                    width: 70%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+                #phone-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+                #email{
+                    display: inline;
+                    margin-left: 10px;
+                    width: 70%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+                #email-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+                #langue{
+                    display: inline;
+                    font-weight: bold;
+                    width: 50%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+                #langue-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+
+                #langue-niveau{
+                    display: inline;
+                    width: 40%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+                #langue-niveau-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+
+                #competence{
+                    display: inline;
+                    font-weight: bold;
+                    width: 50%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+                #competence-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+
+                #competence-niveau{
+                    display: inline;
+                    width: 40%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+                #competence-niveau-label{
+                    color: rgba(255, 255, 255, 0.651);
+                }
+
+                #diplome-annee{
+                    display: inline;
+                    width: 30%;
+                    background-color: rgba(0, 0, 0, 0);
+                    text-align: right;
+                    color: rgba(0, 0, 0, 0.575);
+                }
+
+                #diplome-titre{
+                    display: inline;
+                    font-weight: bold;
+                    width: 40%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+
+
+                #diplome-ville{
+                    display: inline;
+                    width: 31%;
+                    background-color: rgba(0, 0, 0, 0);
+                    text-align: right;
+                    color: rgb(15, 64, 156);
+                }
+
+                #diplome-description{
+                    display: inline;
+                    width: 60%;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+
+
+                #experience-annee{
+                    display: inline;
+                    width: 30%;
+                    background-color: rgba(0, 0, 0, 0);
+                    text-align: right;
+                    color: rgba(0, 0, 0, 0.575);
+                }
+
+                #experience-titre{
+                    display: inline;
+                    font-weight: bold;
+                    width: 60%;
+                    height: 40px;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+
+
+                #experience-sous-domaine{
+                    display: inline;
+                    width: 31%;
+                    background-color: rgba(0, 0, 0, 0);
+                    text-align: right;
+                    color: rgb(15, 64, 156);
+                }
+
+                #experience-description{
+                    display: inline;
+                    width: 60%;
+                    height: 40px;
+                    background-color: rgba(0, 0, 0, 0);
+                    color: rgb(0, 0, 0);
+                }
+
             </style>
         </div>
         <?php   require('../includes/footer.php'); ?>

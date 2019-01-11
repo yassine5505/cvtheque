@@ -15,7 +15,7 @@
     }
     else{
       echo "
-        <script>alert('".$_POST['nom']." n'a pas été ajouté.Veuillez réessayer.')</script>
+        <script>alert('".$_POST['nom']." n'a pas été ajouté. Veuillez réessayer.')</script>
       ";
     }
   }

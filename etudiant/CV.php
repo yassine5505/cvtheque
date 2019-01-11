@@ -1,10 +1,74 @@
 <?php
     session_start();
+
+    function clean($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        $data = str_replace("'", '', $data);
+        return $data;
+    }
+
+
+
     if(isset($_SESSION['connected'])){
         $numero_apogee = $_SESSION['apogee'];
         require('../config/dbConnection.php');
 
-        // selection des informations
+
+
+        /*
+        * modification (from modifierCV.php)
+        */
+        if (isset($_POST['modifier'])) {
+            $desc = clean($_POST['desc']);
+            $phone = clean($_POST['phone']);
+            $email = clean($_POST['email']);
+            
+            $langue = clean($_POST['langue']);
+            $langueniveau = clean($_POST['langue-niveau']);
+
+            $competence = clean($_POST['competence']);
+            $competenceniveau = clean($_POST['competence-niveau']);
+
+            $diplomeannee = clean($_POST['diplome-annee']);
+            $diplometitre = clean($_POST['diplome-titre']);
+            $diplomeville = clean($_POST['diplome-ville']);
+            $diplomedescription = clean($_POST['diplome-description']);
+
+            $experienceannee = clean($_POST['experience-annee']);
+            $experiencetitre = clean($_POST['experience-titre']);
+            $experiencesousdomaine = clean($_POST['experience-sous-domaine']);
+            $experiencedescription = clean($_POST['experience-description']);
+
+            $query = "UPDATE etudiants set description = '$desc', phone = '$phone', email = '$email' where lower(numero_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
+            $query = "UPDATE langues_etudiant set langue = '$langue', niveau = '$langueniveau' where lower(numero_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
+            $query = "UPDATE competences set competence = '$competence', niveau = '$competenceniveau' where lower(apogee_etudiant)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
+            $query = "UPDATE diplomes_etudiant set annee = '$diplomeannee', ville = '$diplomeville', titre = '$diplometitre', description = '$diplomedescription' where lower(etudiant_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
+            $query = "UPDATE experiences_etudiant set annee = '$experienceannee', titre = '$experiencetitre', sous_domaine = '$experiencesousdomaine', description = '$experiencedescription' where lower(etudiant_apogee)='$numero_apogee' ";
+            //echo $query."<br>";
+            $conn->query($query);
+
+        }
+
+
+
+
+        /*
+        * mselection des informations
+        */
         $query = "SELECT * FROM etudiants where numero_apogee='".$numero_apogee."'";
         $students = $conn->query($query);
         if($students->rowCount() == 1){
@@ -15,7 +79,7 @@
             $description = $student['description'];
 
             $imgPath = "../assets/imageprofil/".$student['image'];
-            if(!file_exists($imgPath)){
+            if(!file_exists($imgPath) || $student['image']==null || $student['image']==""){
                 $imgPath = "../assets/imageprofil/man.svg";
             }
 
@@ -44,7 +108,6 @@
         // selection des experiences
         $query = "SELECT * FROM experiences_etudiant where lower(etudiant_apogee)='".$numero_apogee."'";
         $experiences = $conn->query($query);
-
     }
 ?>
 <!DOCTYPE html>
@@ -68,7 +131,7 @@
             <div class="profile col-sm-10">
                 <div class="card">
                     <div class="card-body profile-header">
-                        <h5 class="name"><?= $nom ?> <?= $prenom ?><h5>
+                        <h5 class="name"><?= $nom ?> <?= $prenom ?></h5>
                         <img class="tof" width="130" src="<?=$imgPath?>" alt="">
                         <p class="desc"><?= $description ?><p>
                     </div>
@@ -189,7 +252,7 @@
                     </div>
 
                     <div class="card-body profile-footer">
-                            <h5 class="cv-video-name">CV Video<h5>
+                            <h5 class="cv-video-name">CV Video</h5>
                     <?php
                         if($vidPath==""){
                     ?>
