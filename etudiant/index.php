@@ -125,7 +125,11 @@ if(isset($_POST['submit'])){
                   </div>
                 </div>
             </div>
-            <?php }$i++;}  } ?>
+          <?php }$i++;}  }else{ ?>
+            <div class="row ">
+              <h5>Pas de résultats à afficher.</h5>
+            </div>
+          <?php } ?>
           <!-- RESULTS END-->
         <!--CONTENT END-->
       </div>
