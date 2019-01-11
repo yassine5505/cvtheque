@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 11, 2019 at 03:52 AM
+-- Generation Time: Jan 11, 2019 at 03:09 PM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -52,8 +52,8 @@ CREATE TABLE `competences` (
 --
 
 INSERT INTO `competences` (`id`, `competence`, `niveau`, `apogee_etudiant`) VALUES
-(1, 'Développement web', 'Débutant', 'Saad'),
-(2, 'Unix', 'Master', 'Saad');
+(1, 'Guitar', 'MiFa', 'Saad'),
+(2, 'Guitar', 'MiFa', 'Saad');
 
 -- --------------------------------------------------------
 
@@ -87,8 +87,8 @@ CREATE TABLE `Diplomes_etudiant` (
 --
 
 INSERT INTO `Diplomes_etudiant` (`id`, `etudiant_apogee`, `titre`, `ville`, `annee`, `description`) VALUES
-(1, 'Saad', 'Bac+3', 'Kenitra', '2018', 'Ecole Nationale des Sciences Appliquées Génie Informatique'),
-(2, 'Saad', 'Bac', 'Kenitra', '2015', 'Baccalauréat Sciences Maths A\r\nLycée Hassan2 (Assez Bien)');
+(1, 'Saad', 'Bac-99', 'naouz', '1018', 'Baccalauréat-99'),
+(2, 'Saad', 'Bac-99', 'naouz', '1018', 'Baccalauréat-99');
 
 -- --------------------------------------------------------
 
@@ -138,11 +138,12 @@ CREATE TABLE `etudiants` (
 --
 
 INSERT INTO `etudiants` (`id`, `numero_apogee`, `nom`, `prenom`, `phone`, `email`, `description`, `image`, `video`) VALUES
-(1, 'gh444', 'Mehdi', 'Chaou', '0654889977', '', 'Genie informatique 1 - Interesse par le developpement web', 'mehdi-chaert.jpg', NULL),
-(2, 'Saad', 'Belgnaoui', 'Saad', '0699441122', 'saad@gmail.com', 'Genie informatique 1 - Interesse par le developpement web', 'saad-belgnaoui.jpg', 'Saad.mp4'),
+(1, 'gh444', 'Mehdi', 'chaaaaaaaaaa', '0654889977', '', 'Genie informatique 1 - Interesse par le developpement web', 'mehdi-chaert.jpg', NULL),
+(2, 'Saad', 'Belgnaoui', 'Saad', '0999999999', 'man@gmail.man', 'chaoui', 'saad-belgnaoui.jpg', 'Saad.mp4'),
 (3, '447', 'Reda', 'Ennakouri', '0600098419', '', 'Etudiant GI1', 'zuck.jpg', NULL),
 (4, '447788', 'Yassine', 'Chra', '022114455', '', 'Genie info 2', 'zuck.jpg', NULL),
-(5, '741', 'Abdellah', 'Benkirane', '0669874521', '', 'Description de Abdellah benkirane\'d', 'random.jpg', NULL);
+(5, '741', 'Abdellah', 'Benkirane', '0669874521', '', 'Description de Abdellah benkirane\'d', 'random.jpg', NULL),
+(6, 's', 's', 's', 's', 'sss@gmail.com', 's@gmail.com', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -164,8 +165,8 @@ CREATE TABLE `experiences_etudiant` (
 --
 
 INSERT INTO `experiences_etudiant` (`id`, `annee`, `titre`, `sous_domaine`, `description`, `etudiant_apogee`) VALUES
-(1, '2016', 'HTML5, Bootstrap4, PHP5, MySQL', 'Dev Web', 'Application web pour la gestion des absences de notre école Ensaté', 'Saad'),
-(2, '2016', 'Java, Swing', 'Stage', 'Application desktop pour la gestion des factures d’électricité.', 'Saad');
+(1, '1600', 'Java', 'Tabi3i', 'App 9waleb', 'Saad'),
+(2, '1600', 'Java', 'Tabi3i', 'App 9waleb', 'Saad');
 
 -- --------------------------------------------------------
 
@@ -185,8 +186,8 @@ CREATE TABLE `langues_etudiant` (
 --
 
 INSERT INTO `langues_etudiant` (`id`, `numero_apogee`, `langue`, `niveau`) VALUES
-(1, 'Saad', 'Anglais', 'B1'),
-(2, 'Saad', 'Français', 'B2');
+(1, 'Saad', 'english', 'B99'),
+(2, 'Saad', 'english', 'B99');
 
 -- --------------------------------------------------------
 
@@ -306,7 +307,7 @@ ALTER TABLE `entreprises`
 -- AUTO_INCREMENT for table `etudiants`
 --
 ALTER TABLE `etudiants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `experiences_etudiant`
