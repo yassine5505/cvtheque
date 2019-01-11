@@ -236,10 +236,10 @@ function etudiantPeutPostuler($idEtudiant,$idOffre,$conn){
   $selectCandidature->bindParam(':etudiant_id',$idEtudiant);
   $selectCandidature->bindParam(':offre_id',$idOffre);
   if($selectCandidature && $selectCandidature->rowCount() == 0){
-    return false;
+    return true;
   }
   else{
-    return true;
+    return false;
   }
 
 }
@@ -250,8 +250,7 @@ function ajouterCandidature($idEtudiant,$idOffre,$conn){
     $insertCandidature->bindParam(':idEtudiant',$idEtudiant);
     $insertCandidature->bindParam(':idOffre',$idOffre);
     $insertCandidature->execute();
-    if($insertCandidature) return true;
-    return false;
+    
   }
   else{
     return false;
