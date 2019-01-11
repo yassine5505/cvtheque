@@ -27,7 +27,7 @@
         }
         else if($_SESSION['type'] == 'entreprise'){
         ?>
-        <a class="dropdown-item" href="profil.php"><i class="fa fa-file"></i>    Profil</a>
+        <a class="dropdown-item" href="index.php"><i class="fa fa-file"></i>    Profil</a>
         <a class="dropdown-item" href="listerCvs.php"><i class="fa fa-list"></i>    Liste CVs</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="../index.php"><i class="fa fa-power-off"></i>   Se déconnecter</a>

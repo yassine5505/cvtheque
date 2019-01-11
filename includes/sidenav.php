@@ -34,6 +34,18 @@
     <?php } ?>
   <?php if(isset($_SESSION['connected']) && isset($_SESSION['type']) && $_SESSION['type'] == 'entreprise'){ ?>
     <li class="nav-item active">
+      <a class="nav-link" href="index.php">
+        <i class="fas fa-user-circle"></i>
+        <span class="menu-label"> Voir mon profil</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="modifierProfil.php">
+        <i class="fas fa-edit"></i>
+        <span class="menu-label"> Modifier mon profil</span>
+      </a>
+    </li>
+    <li class="nav-item active">
       <a class="nav-link" href="ajouterOffre.php">
         <i class="fas fa-bell"></i>
         <span class="menu-label"> Ajouter une offre</span>
@@ -41,8 +53,14 @@
     </li>
     <li class="nav-item active">
       <a class="nav-link" href="listerCvs.php">
+        <i class="fas fa-search"></i>
+        <span class="menu-label"> Rechercher les CV</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="listerCandidatures.php">
         <i class="fas fa-list"></i>
-        <span class="menu-label"> Candidatures</span>
+        <span class="menu-label"> Voir les candidatures</span>
       </a>
     </li>
   <?php } ?>
@@ -57,6 +75,12 @@
       <a class="nav-link" href="modifierCV.php">
         <i class="fas fa-pen"></i>
         <span class="menu-label"> Modifier mon CV</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="index.php">
+        <i class="fas fa-list"></i>
+        <span class="menu-label"> Liste des offres</span>
       </a>
     </li>
   <?php } ?>

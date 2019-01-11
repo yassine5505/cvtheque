@@ -175,6 +175,15 @@ function listerOffres($conn){
     return $selectOffres;
   }
 }
+//function that returns offres  de stage in array
+function listerOffresById($id,$conn){
+  $selectOffres = $conn->prepare("SELECT * FROM offres inner join entreprises on offres.entreprise_id = entreprises.id where offres.id=:id");
+  $selectOffres->bindParam(':id',$id);
+  $selectOffres->execute();
+  if($selectOffres){
+    return $selectOffres;
+  }
+}
 
 //function that filters offres
 function filterOffres($competence, $duree, $nomEntreprise,$conn){
@@ -200,6 +209,31 @@ function filterOffres($competence, $duree, $nomEntreprise,$conn){
   }
 }
 
+//function to filter cvs
+function filterCv($competence,$experience,$diplome,$conn){
+  $competence = strtolower($competence);
+  $experience = strtolower($experience);
+  $diplome = strtolower($diplome);
+
+  // $selectOffres = $conn->prepare("SELECT * FROM offres inner JOIN entreprises on offres.entreprise_id=entreprise.id where entreprise.nom like :nomEntreprise or offres.initule like :intitule or offres.duree like :duree");
+  $query ="select distinct etudiants.nom,etudiants.prenom,etudiants.phone,etudiants.image,etudiants.numero_apogee as apogee,etudiants.email,competences.competence,experiences_etudiant.titre as etitre,diplomes_etudiant.titre as dtitre from etudiants inner join competences on etudiants.numero_apogee=competences.apogee_etudiant inner join experiences_etudiant on etudiants.numero_apogee=experiences_etudiant.etudiant_apogee inner join diplomes_etudiant on etudiants.numero_apogee=diplomes_etudiant.etudiant_apogee where 1=1
+  ";
+  if("" != $competence){
+    $query.= " and lower(competences.competence) LIKE '%$competence%' ";
+  }
+  else if("" != $experience){
+    $query .= " and lower(experiences_etudiant.titre) like '%$experience%' ";
+  }
+  else if("" != $diplome){
+    $query .= " and diplomes_etudiant.titre like '%$diplome%' ";
+  }
+  // $query.=" group by etudiants.numero_apogee";
+  $selectOffres = $conn->query($query);
+  if($selectOffres) return $selectOffres;
+  else if($selectOffres->rowCount() == 0){
+    return false;
+  }
+}
 // function that lists competences from a given offres
 function listerCompetences($id,$conn){
   $selectCompetences = $conn->prepare("SELECT * FROM competences_requises WHERE offre_id = :id");
@@ -211,6 +245,18 @@ function listerCompetences($id,$conn){
   return false;
 }
 
+//function that returns competences of a student
+
+// function that lists competences from a given offres
+function listerCompetencesEtudiant($id,$conn){
+  $selectCompetences = $conn->prepare("SELECT * FROM competences WHERE apogee_etudiant = :id");
+  $selectCompetences -> bindParam(':id',$id);
+  $selectCompetences->execute();
+  if($selectCompetences){
+    return $selectCompetences;
+  }
+  return false;
+}
 
 //function that returns offres  de stage in array
 function listerEtudiants($conn){
@@ -221,6 +267,33 @@ function listerEtudiants($conn){
 
 }
 
+//function that checks if etudiant has already applied to offre
+function etudiantPeutPostuler($idEtudiant,$idOffre,$conn){
+  $selectCandidature = $conn->prepare("SELECT * FROM candidatures where etudiant_id=:etudiant_id and offre_id=:offre_id;");
+  $selectCandidature->bindParam(':etudiant_id',$idEtudiant);
+  $selectCandidature->bindParam(':offre_id',$idOffre);
+  if($selectCandidature && $selectCandidature->rowCount() == 0){
+    return true;
+  }
+  else{
+    return false;
+  }
+
+}
+//function that adds candidature
+function ajouterCandidature($idEtudiant,$idOffre,$conn){
+  if(etudiantPeutPostuler($idEtudiant,$idOffre,$conn)){
+    $insertCandidature = $conn->prepare("INSERT INTO candidatures(etudiant_id,offre_id) VALUES(:idEtudiant,:idOffre)");
+    $insertCandidature->bindParam(':idEtudiant',$idEtudiant);
+    $insertCandidature->bindParam(':idOffre',$idOffre);
+    $insertCandidature->execute();
+
+  }
+  else{
+    return false;
+  }
+
+}
 
 // function that returns etudiant info based on numero_apgogee
 function infoEtudiant($id,$conn){
@@ -233,6 +306,16 @@ function infoEtudiant($id,$conn){
   }
 }
 
+//function that returns info etudiant from apogee
+function infoEtudiantByApogee($numero_apogee,$conn){
+  $selectEtudiant = $conn->prepare("SELECT * FROM etudiants WHERE numero_apogee=:numero_apogee limit 1");
+  $selectEtudiant->bindParam(':numero_apogee',$numero_apogee);
+  $selectEtudiant->execute();
+  if($selectEtudiant && $selectEtudiant->rowCount() > 0){
+
+    return $selectEtudiant;
+  }
+}
 //function that returns info about offre de stage
 function infoOffre($intitule,$duree,$conn){
   $selectOffre = $conn->prepare("SELECT * FROM offres where intitule=:intitule and duree=:duree limit 1");
