@@ -41,7 +41,7 @@
     </li>
     <li class="nav-item active">
       <a class="nav-link" href="listerCvs.php">
-        <i class="fas fa-bell"></i>
+        <i class="fas fa-list"></i>
         <span>Candidatures</span>
       </a>
     </li>
@@ -55,7 +55,7 @@
     </li>
     <li class="nav-item active">
       <a class="nav-link" href="modifierCV.php">
-        <i class="fas fa-pencil-square-o"></i>
+        <i class="fas fa-pen"></i>
         <span>Modifier mon CV</span>
       </a>
     </li>

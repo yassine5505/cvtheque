@@ -9,39 +9,38 @@
 
   <!-- Navbar -->
   <ul class="navbar-nav ml-auto ml-md-0">
-    <li class="nav-item dropdown no-arrow mx-1">
-      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-bell fa-fw"></i>
-        <span class="badge badge-danger">9+</span>
-      </a>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
+
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-user-circle fa-fw"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
         <?php
-        if (isset($_SESSION['connected'])){
+        if (isset($_SESSION['connected']) && isset($_SESSION['type'])){
+          if ($_SESSION['type'] == 'admin'){
         ?>
-            <a class="dropdown-item" href="#">Login</a>
-            <a class="dropdown-item" href="#">Register</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+          <a class="dropdown-item" href="profil.php"><i class="fa fa-file"></i>   Profil</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>   Se déconnecter</a>
+        <?php
+
+        }
+        else if($_SESSION['type'] == 'entreprise'){
+        ?>
+        <a class="dropdown-item" href="profil.php"><i class="fa fa-file"></i>    Profil</a>
+        <a class="dropdown-item" href="profil.php"><i class="fa fa-list"></i>    Liste CVs</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>    Se déconnecter</a>
         <?php
         }
-        else{
-        ?>
-          <a class="dropdown-item" href="#">Se connecter</a>
-          <a class="dropdown-item" href="#">S\'inscrire</a>
-        <?php
-        }
-        ?>
+        else if($_SESSION['type']=='student'){ ?>
+          <a class="dropdown-item" href="profil.php"><i class="fa fa-user-circle"></i>    Profil</a>
+          <a class="dropdown-item" href="CV.php"><i class="fa fa-file"></i>    CV</a>
+          <a class="dropdown-item" href="modifierCV"><i class="fa fa-pen"></i>    Modifier CV</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i>    Se déconnecter</a>
+        <?php }
+      } ?>
       </div>
     </li>
   </ul>
