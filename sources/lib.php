@@ -74,9 +74,9 @@ function modifierEntreprise($nom,$phone,$adresse,$description,$id,$conn){
 }
 
 //function that add etudiant to db
-function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
+function ajouterEtudiant($apogee,$nom,$prenom,$phone,$email,$description,$conn){
   $selectEtudiantByApogee = $conn->prepare("SELECT numero_apogee FROM etudiants where numero_apogee=:apogee");
-  $insertEtudiant = $conn->prepare("INSERT INTO etudiants(numero_apogee,nom,prenom,phone,description) values (:apogee,:nom,:prenom,:phone,:description)");
+  $insertEtudiant = $conn->prepare("INSERT INTO etudiants(numero_apogee,nom,prenom,phone,email,description) values (:apogee,:nom,:prenom,:phone,:email,:description)");
   $updateEtudiant = $conn->prepare("update etudiants set image = :image where numero_apogee=:apogee");
 
 
@@ -96,6 +96,7 @@ function ajouterEtudiant($apogee,$nom,$prenom,$phone,$description,$conn){
     $insertEtudiant->bindParam(':nom',$nom);
     $insertEtudiant->bindParam(':prenom',$prenom);
     $insertEtudiant->bindParam(':phone',$phone);
+    $insertEtudiant->bindParam(':email',$email);
     $insertEtudiant->bindParam(':description',$description);
     $insertEtudiant->execute();
     //update entreprise avec le path logo

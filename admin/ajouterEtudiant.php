@@ -5,9 +5,9 @@
   require '../config/dbConnection.php';
   require '../sources/lib.php';
   checkSession();
-    if(isset($_POST['submit']) && isset($_POST['apogee']) && isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['phone']) && isset($_POST['description'])){
+    if(isset($_POST['submit']) && isset($_POST['apogee']) && isset($_POST['nom']) && isset($_POST['prenom'])&& isset($_POST['phone']) && isset($_POST['email']) && isset($_POST['description'])){
     //submit form
-    if(ajouterEtudiant(clean($_POST['apogee']),clean($_POST['nom']),clean($_POST['prenom']),clean($_POST['phone']),clean($_POST['description']),$conn)){
+    if(ajouterEtudiant(clean($_POST['apogee']),clean($_POST['nom']),clean($_POST['prenom']),clean($_POST['phone']),clean($_POST['email']),clean($_POST['description']),$conn)){
       //success message
       echo "
         <script>alert('".$_POST['nom']." ajouté avec succès.')</script>
@@ -76,6 +76,17 @@
                 <div class="form-label-group">
                   <input  type="text" id="phone" name="phone" class="form-control"  placeholder="Numero de telephone" required="required"></textarea>
                   <label for="phone">Téléphone</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-12">
+                <div class="form-label-group">
+                  <input  type="email" name="email" id="email" class="form-control"  placeholder="Email etudiant">
+                  <label for="email">Email</label>
+
                 </div>
               </div>
             </div>
