@@ -66,7 +66,7 @@
             <div class="col-sm-1">
             </div>
             <div class="profile col-sm-10">
-                <form class="form-modifier" action="CV.php" method="post">
+                <form class="form-modifier" id="form-modifier" action="CV.php" method="post">
                     <div class="card">
                         <div class="card-body profile-header">
                             <h5 class="name"><?= $nom ?> <?= $prenom ?></h5>
@@ -101,8 +101,8 @@
                                     ?>
 
                                         <div class="form-group langue-group">
-                                            <input type="text"  name="langue" id="langue" value="<?= $language['langue'] ?>" class="form-control" placeholder="langue" required="required">
-                                            <input type="text"  name="langue-niveau" id="langue-niveau" value="<?= $language['niveau'] ?>" class="form-control" placeholder="niveau" required="required">
+                                            <input type="text"  name="langue[]" id="langue" value="<?= $language['langue'] ?>" class="form-control" placeholder="langue" required="required">
+                                            <input type="text"  name="langue-niveau[]" id="langue-niveau" value="<?= $language['niveau'] ?>" class="form-control" placeholder="niveau" required="required">
                                         </div>
                                     <?php        
                                         }
@@ -123,8 +123,8 @@
                                     ?>
 
                                         <div class="form-group competence-group">
-                                            <input type="text"  name="competence" id="competence" value="<?= $competence['competence'] ?>" class="form-control" placeholder="competence" required="required">
-                                            <input type="text"  name="competence-niveau" id="competence-niveau" value="<?= $competence['niveau'] ?>" class="form-control" placeholder="niveau" required="required">
+                                            <input type="text"  name="competence[]" id="competence" value="<?= $competence['competence'] ?>" class="form-control" placeholder="competence" required="required">
+                                            <input type="text"  name="competence-niveau[]" id="competence-niveau" value="<?= $competence['niveau'] ?>" class="form-control" placeholder="niveau" required="required">
                                         </div>
                                     <?php        
                                         }
@@ -146,14 +146,14 @@
                                     ?>
                                         <div class="row">
                                             <div class="form-group ">
-                                                <input type="text"  name="diplome-annee" id="diplome-annee" value="<?= $diplome['annee'] ?>" class="form-control" placeholder="Annee" required="required">
-                                                <input type="text"  name="diplome-titre" id="diplome-titre" value="<?= $diplome['titre'] ?>" class="form-control" placeholder="Titre" required="required">
+                                                <input type="text"  name="diplome-annee[]" id="diplome-annee" value="<?= $diplome['annee'] ?>" class="form-control" placeholder="Annee" required="required">
+                                                <input type="text"  name="diplome-titre[]" id="diplome-titre" value="<?= $diplome['titre'] ?>" class="form-control" placeholder="Titre" required="required">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group ">
-                                                <input type="text"  name="diplome-ville" id="diplome-ville" value="<?= $diplome['ville'] ?>" class="form-control" placeholder="Ville" required="required">
-                                                <input type="text"  name="diplome-description" id="diplome-description" value="<?= $diplome['description'] ?>" class="form-control" placeholder="Description" required="required">
+                                                <input type="text"  name="diplome-ville[]" id="diplome-ville" value="<?= $diplome['ville'] ?>" class="form-control" placeholder="Ville" required="required">
+                                                <input type="text"  name="diplome-description[]" id="diplome-description" value="<?= $diplome['description'] ?>" class="form-control" placeholder="Description" required="required">
                                             </div>
                                         </div>
                                         <br>
@@ -175,14 +175,14 @@
                                     ?>
                                         <div class="row">
                                             <div class="form-group ">
-                                                <input type="text"  name="experience-annee" id="experience-annee" value="<?= $experience['annee'] ?>" class="form-control" placeholder="Annee" required="required">
-                                                <input type="text"  name="experience-titre" id="experience-titre" value="<?= $experience['titre'] ?>" class="form-control" placeholder="Titre" required="required">
+                                                <input type="text"  name="experience-annee[]" id="experience-annee" value="<?= $experience['annee'] ?>" class="form-control" placeholder="Annee" required="required">
+                                                <input type="text"  name="experience-titre[]" id="experience-titre" value="<?= $experience['titre'] ?>" class="form-control" placeholder="Titre" required="required">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group ">
-                                                <input type="text"  name="experience-sous-domaine" id="experience-sous-domaine" value="<?= $experience['sous_domaine'] ?>" class="form-control" placeholder="Sous domaine" required="required">
-                                                <input type="text"  name="experience-description" id="experience-description" value="<?= $experience['description'] ?>" class="form-control" placeholder="Description" required="required">
+                                                <input type="text"  name="experience-sous-domaine[]" id="experience-sous-domaine" value="<?= $experience['sous_domaine'] ?>" class="form-control" placeholder="Sous domaine" required="required">
+                                                <input type="text"  name="experience-description[]" id="experience-description" value="<?= $experience['description'] ?>" class="form-control" placeholder="Description" required="required">
                                             </div>
                                         </div>
                                         <br>
@@ -462,5 +462,14 @@
   </div>
 
   <?php require('../includes/scripts.php'); ?>
+  <script>
+    $('body').keypress(function (e) {
+        var key = e.which;
+        if(key == 13)  // the enter key code
+        {
+            $("#form-modifier").submit();
+        }
+    }); 
+  </script>
 </body>
 </html>

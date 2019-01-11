@@ -17,49 +17,158 @@
 
 
 
+
+        /*
+        * selection des anciens informations
+        */
+        $query = "SELECT * FROM etudiants where numero_apogee='".$numero_apogee."'";
+        $students = $conn->query($query);
+        if($students->rowCount() == 1){
+            $student = $students->fetch();
+
+            $nom = $student['nom'];
+            $prenom = $student['prenom'];
+            $description = $student['description'];
+
+            $imgPath = "../assets/imageprofil/".$student['image'];
+            if(!file_exists($imgPath) || $student['image']==null || $student['image']==""){
+                $imgPath = "../assets/imageprofil/man.svg";
+            }
+
+            $vidPath = "../assets/cvVideo/".$student['video'];
+            if(!file_exists($vidPath)){
+                $vidPath = "";
+            }
+            $apogee = $numero_apogee;
+            $tele = $student['phone'];
+            $email = $student['email'];
+        }
+
+        // selection des langues
+        $query = "SELECT * FROM langues_etudiant where lower(numero_apogee)='".$numero_apogee."'";
+        $oldLangues1 = $conn->query($query);
+
+        // selection des langues
+        $query = "SELECT * FROM langues_etudiant where lower(numero_apogee)='".$numero_apogee."'";
+        $oldLangues2 = $conn->query($query);
+
+
+        // selection des competences
+        $query = "SELECT * FROM competences where lower(apogee_etudiant)='".$numero_apogee."'";
+        $oldCompetences = $conn->query($query);
+
+        // selection des diplomes
+        $query = "SELECT * FROM Diplomes_etudiant where lower(etudiant_apogee)='".$numero_apogee."'";
+        $oldDiplomes = $conn->query($query);
+
+        // selection des experiences
+        $query = "SELECT * FROM experiences_etudiant where lower(etudiant_apogee)='".$numero_apogee."'";
+        $oldExperiences = $conn->query($query);
+
+
+
+
         /*
         * modification (from modifierCV.php)
         */
         if (isset($_POST['modifier'])) {
+            // information personnel
             $desc = clean($_POST['desc']);
             $phone = clean($_POST['phone']);
             $email = clean($_POST['email']);
-            
-            $langue = clean($_POST['langue']);
-            $langueniveau = clean($_POST['langue-niveau']);
-
-            $competence = clean($_POST['competence']);
-            $competenceniveau = clean($_POST['competence-niveau']);
-
-            $diplomeannee = clean($_POST['diplome-annee']);
-            $diplometitre = clean($_POST['diplome-titre']);
-            $diplomeville = clean($_POST['diplome-ville']);
-            $diplomedescription = clean($_POST['diplome-description']);
-
-            $experienceannee = clean($_POST['experience-annee']);
-            $experiencetitre = clean($_POST['experience-titre']);
-            $experiencesousdomaine = clean($_POST['experience-sous-domaine']);
-            $experiencedescription = clean($_POST['experience-description']);
 
             $query = "UPDATE etudiants set description = '$desc', phone = '$phone', email = '$email' where lower(numero_apogee)='$numero_apogee' ";
             //echo $query."<br>";
             $conn->query($query);
+            
 
-            $query = "UPDATE langues_etudiant set langue = '$langue', niveau = '$langueniveau' where lower(numero_apogee)='$numero_apogee' ";
-            //echo $query."<br>";
-            $conn->query($query);
 
-            $query = "UPDATE competences set competence = '$competence', niveau = '$competenceniveau' where lower(apogee_etudiant)='$numero_apogee' ";
-            //echo $query."<br>";
-            $conn->query($query);
+            // Langues
+            $i=0;
+            while(isset($_POST['langue'][$i])){
+                $oldLangue = $oldLangues1->fetch();
+                $oldLang = $oldLangue['langue'];
 
-            $query = "UPDATE diplomes_etudiant set annee = '$diplomeannee', ville = '$diplomeville', titre = '$diplometitre', description = '$diplomedescription' where lower(etudiant_apogee)='$numero_apogee' ";
-            //echo $query."<br>";
-            $conn->query($query);
+                $langue = clean($_POST['langue'][$i]);
+                $query = "UPDATE langues_etudiant set langue = '$langue' where langue ='$oldLang' and lower(numero_apogee)='$numero_apogee' ";
+                //echo $query."<br>";
+                $conn->query($query);
+                $i++;
+            }
 
-            $query = "UPDATE experiences_etudiant set annee = '$experienceannee', titre = '$experiencetitre', sous_domaine = '$experiencesousdomaine', description = '$experiencedescription' where lower(etudiant_apogee)='$numero_apogee' ";
-            //echo $query."<br>";
-            $conn->query($query);
+            // langues niveau
+            $i=0;
+            while(isset($_POST['langue-niveau'][$i])){
+                $oldLangue = $oldLangues2->fetch();
+                $oldLang = $oldLangue['langue'];
+
+                $langueniveau = clean($_POST['langue-niveau'][$i]);
+                $query = "UPDATE langues_etudiant set niveau = '$langueniveau' where langue ='$oldLang' and lower(numero_apogee)='$numero_apogee' ";
+                //echo $query."<br>";
+                $conn->query($query);
+                $i++;
+            }
+
+
+
+
+            // Compétence et niveau
+            $i=0;
+            while(isset($_POST['competence'][$i]) && isset($_POST['competence-niveau'][$i])){
+                $oldCompetence = $oldCompetences->fetch();
+                $oldComp = $oldCompetence['competence'];
+                $oldNiveau = $oldCompetence['niveau'];
+
+                $competence = clean($_POST['competence'][$i]);
+                $competenceniveau = clean($_POST['competence-niveau'][$i]);
+                $query = "UPDATE competences set competence = '$competence', niveau = '$competenceniveau' where competence = '$oldComp' and niveau = '$oldNiveau' and lower(apogee_etudiant)='$numero_apogee' ";
+                //echo $query."<br>";
+                $conn->query($query);
+                $i++;
+            }
+
+
+
+            // Diplomas
+            $i=0;
+            while(isset($_POST['diplome-annee'][$i]) && isset( $_POST['diplome-titre'][$i]) and isset($_POST['diplome-ville'][$i]) && isset($_POST['diplome-description'][$i])){
+                $oldDiplome = $oldDiplomes->fetch();
+                $oldAnnee = $oldDiplome['annee'];
+                $oldTitre = $oldDiplome['titre'];
+                $oldVille = $oldDiplome['ville'];
+                $oldDescription = $oldDiplome['description'];
+
+                $annee = clean($_POST['diplome-annee'][$i]);
+                $titre = clean($_POST['diplome-titre'][$i]);
+                $ville = clean($_POST['diplome-ville'][$i]);
+                $description = clean($_POST['diplome-description'][$i]);
+                $query = "UPDATE diplomes_etudiant set annee = '$annee', titre = '$titre', ville = '$ville', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and ville = '$oldVille' and description = '$oldDescription' ";
+                //echo $query."<br>";
+                $conn->query($query);
+                $i++;
+            }
+
+
+
+            // Experiences
+            $i=0;
+            while(isset($_POST['experience-annee'][$i]) && isset($_POST['experience-titre'][$i]) && isset($_POST['experience-sous-domaine'][$i]) && isset($_POST['experience-description'][$i])){
+                
+                $oldExperience = $oldExperiences->fetch();
+                $oldAnnee = $oldExperience['annee'];
+                $oldTitre = $oldExperience['titre'];
+                $oldSousDomaine = $oldExperience['sous_domaine'];
+                $oldDescription = $oldExperience['description'];
+
+                $annee = clean($_POST['experience-annee'][$i]);
+                $titre = clean($_POST['experience-titre'][$i]);
+                $sous_domaine = clean($_POST['experience-sous-domaine'][$i]);
+                $description = clean($_POST['experience-description'][$i]);
+                $query = "UPDATE experiences_etudiant set annee = '$annee', titre = '$titre', sous_domaine = '$sous_domaine', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and sous_domaine = '$oldSousDomaine' and description = '$oldDescription' ";
+                //echo $query."<br>";
+                $conn->query($query);
+                $i++;
+            }
 
         }
 
@@ -67,7 +176,7 @@
 
 
         /*
-        * mselection des informations
+        * selection des nouvelles informations
         */
         $query = "SELECT * FROM etudiants where numero_apogee='".$numero_apogee."'";
         $students = $conn->query($query);
