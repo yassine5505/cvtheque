@@ -34,6 +34,12 @@
     <?php } ?>
   <?php if(isset($_SESSION['connected']) && isset($_SESSION['type']) && $_SESSION['type'] == 'entreprise'){ ?>
     <li class="nav-item active">
+      <a class="nav-link" href="index.php">
+        <i class="fas fa-user-circle"></i>
+        <span class="menu-label"> Voir mon profil</span>
+      </a>
+    </li>
+    <li class="nav-item active">
       <a class="nav-link" href="ajouterOffre.php">
         <i class="fas fa-bell"></i>
         <span class="menu-label"> Ajouter une offre</span>
