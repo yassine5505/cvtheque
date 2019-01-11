@@ -295,6 +295,18 @@ function ajouterCandidature($idEtudiant,$idOffre,$conn){
 
 }
 
+//function that returns candidatures to every offer by an etudiant
+function listerCandidatures($idEntreprise,$conn ){
+  $select = $conn->prepare("
+  select distinct etudiants.numero_apogee as apogee,etudiants.image,etudiants.nom,etudiants.prenom,etudiants.phone, etudiants.email from etudiants
+  	inner join candidatures on etudiants.id = candidatures.etudiant_id
+      inner join offres on offres.id=candidatures.offre_id
+      where offres.entreprise_id=:idEntreprise");
+      $select->bindParam(':idEntreprise',$idEntreprise);
+      $select->execute();
+      if($select ) return $select;
+      return false;
+}
 // function that returns etudiant info based on numero_apgogee
 function infoEtudiant($id,$conn){
   $selectEtudiant = $conn->prepare("SELECT * FROM etudiants WHERE id=:id limit 1");
