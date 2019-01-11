@@ -1,34 +1,63 @@
 <ul class="sidebar navbar-nav">
-         <li class="nav-item active">
-           <a class="nav-link" href="index.html">
-             <i class="fas fa-fw fa-tachometer-alt"></i>
-             <span>Dashboard</span>
-           </a>
-         </li>
-         <li class="nav-item dropdown">
-           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             <i class="fas fa-fw fa-folder"></i>
-             <span>Pages</span>
-           </a>
-           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-             <h6 class="dropdown-header">Login Screens:</h6>
-             <a class="dropdown-item" href="login.html">Login</a>
-             <a class="dropdown-item" href="register.html">Register</a>
-             <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-             <div class="dropdown-divider"></div>
-             <h6 class="dropdown-header">Other Pages:</h6>
-             <a class="dropdown-item" href="404.html">404 Page</a>
-             <a class="dropdown-item" href="blank.html">Blank Page</a>
-           </div>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="charts.html">
-             <i class="fas fa-fw fa-chart-area"></i>
-             <span>Charts</span></a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="tables.html">
-             <i class="fas fa-fw fa-table"></i>
-             <span>Tables</span></a>
-         </li>
-       </ul>
+  <?php if (isset($_SESSION['connected']) && isset($_SESSION['type']) && $_SESSION['type'] == 'admin'){
+    ?>
+    <li class="nav-item active">
+      <a class="nav-link" href="ajouterEtudiant.php">
+        <i class="fas fa-industry"></i>
+        <span>Nouvelle Entreprise</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="ajouterEtudiant.php">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Nouvel Etudiant</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="listerEntreprises.php">
+        <i class="fas fa-th-list"></i>
+        <span>Afficher les entreprises</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="listerEtudiants.php">
+        <i class="fas fa-address-book"></i>
+        <span>Liste des étudiants</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="listerOffres.php">
+        <i class="fas fa-bell"></i>
+        <span>Liste des offres</span>
+      </a>
+    </li>
+    <?php } ?>
+  <?php if(isset($_SESSION['connected']) && isset($_SESSION['type']) && $_SESSION['type'] == 'entreprise'){ ?>
+    <li class="nav-item active">
+      <a class="nav-link" href="ajouterOffre.php">
+        <i class="fas fa-bell"></i>
+        <span>Ajouter une offre</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="listerCvs.php">
+        <i class="fas fa-bell"></i>
+        <span>Candidatures</span>
+      </a>
+    </li>
+  <?php } ?>
+  <?php if(isset($_SESSION['connected']) && isset($_SESSION['type']) && $_SESSION['type'] == 'student'){ ?>
+    <li class="nav-item active">
+      <a class="nav-link" href="CV.php">
+        <i class="fas fa-file"></i>
+        <span>Consulter mon CV</span>
+      </a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="modifierCV.php">
+        <i class="fas fa-pencil-square-o"></i>
+        <span>Modifier mon CV</span>
+      </a>
+    </li>
+  <?php } ?>
+</ul>

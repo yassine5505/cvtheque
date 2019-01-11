@@ -1,7 +1,10 @@
 
   <?php
+  session_start();
+
   require '../config/dbConnection.php';
   require '../sources/lib.php';
+  checkSession();
   if (isset($_GET['nomEntreprise'])){
     $e = infoEntreprise($_GET['nomEntreprise'],$conn)->fetch();
     // print_r($_POST)['submit'];

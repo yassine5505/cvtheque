@@ -4,6 +4,7 @@ session_start();
 
 require '../config/dbConnection.php';
 require '../sources/lib.php';
+checkSession();
 /*********/
 $e ;
 $b1 = false;$b2 = false;
@@ -14,10 +15,6 @@ if(isset($_SESSION['username'])){
 
 }
 else{
-  //not connected as entreprise
-  //destroy session and redirect
-  session_destory();
-  header("Location: ../index.php");
 }
 /********/
 if(isset($_POST['submit'])){
@@ -37,7 +34,7 @@ if(isset($_POST['submit'])){
         alert('Offre ajoutée avec succès !');
       </script>
     ";
-  }
+    }
   else{
     echo "
       <script>

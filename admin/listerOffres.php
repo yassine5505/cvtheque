@@ -1,8 +1,10 @@
 
   <?php
+  session_start();
+
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-
+  checkSession();
   $offres = listerOffres($conn);
   // while($o = $offres->fetch()){
   //     // print_r($o);

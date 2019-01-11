@@ -1,8 +1,10 @@
 
   <?php
+  session_start();
+
   require '../config/dbConnection.php';
   require '../sources/lib.php';
-
+  checkSession();
   $entreprises = listerEntreprises($conn);
 
    ?>

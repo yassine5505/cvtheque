@@ -1,7 +1,10 @@
 
   <?php
+  session_start();
+
   require '../config/dbConnection.php';
   require '../sources/lib.php';
+  checkSession();
   if (isset($_GET['idEtudiant'])){
     $e = infoEtudiant($_GET['idEtudiant'],$conn)->fetch();
     // print_r($_POST)['submit'];
