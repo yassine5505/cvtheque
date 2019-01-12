@@ -16,7 +16,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="listerEntreprises.php">
         <i class="fas fa-th-list"></i>
-        <span class="menu-label"> Afficher les entreprises</span>
+        <span class="menu-label"> Liste des entreprises</span>
       </a>
     </li>
     <li class="nav-item active">

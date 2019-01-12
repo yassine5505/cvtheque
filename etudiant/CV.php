@@ -34,7 +34,7 @@
             }
 
             $vidPath = "../assets/cvVideo/".$student['video'];
-            if(!file_exists($vidPath)){
+            if(!file_exists($vidPath) || $student['video']=="" || $student['video']==""){
                 $vidPath = "";
             }
             $apogee = $numero_apogee;
@@ -245,7 +245,7 @@
             }
 
             $vidPath = "../assets/cvVideo/".$student['video'];
-            if(!file_exists($vidPath)){
+            if(!file_exists($vidPath) || $student['video']=="" ){
                 $vidPath = "";
             }
             $apogee = $numero_apogee;
