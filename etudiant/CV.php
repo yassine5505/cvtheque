@@ -154,12 +154,12 @@
                 $description = clean($_POST['diplome-description'][$i]);
 
                 if($oldDiplome!="") {
-                    $query = "UPDATE diplomes_etudiant set annee = '$annee', titre = '$titre', ville = '$ville', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and ville = '$oldVille' and description = '$oldDescription' ";
+                    $query = "UPDATE Diplomes_etudiant set annee = '$annee', titre = '$titre', ville = '$ville', description = '$description' where lower(etudiant_apogee)='$numero_apogee' and annee = '$oldAnnee' and titre = '$oldTitre' and ville = '$oldVille' and description = '$oldDescription' ";
                     //echo $query."<br>";
                     $conn->query($query);
                 }
                 else{
-                    $query = "INSERT INTO diplomes_etudiant(annee,titre,ville,description,etudiant_apogee) VALUES('$annee','$titre','$ville','$description','$numero_apogee')";
+                    $query = "INSERT INTO Diplomes_etudiant(annee,titre,ville,description,etudiant_apogee) VALUES('$annee','$titre','$ville','$description','$numero_apogee')";
                     //echo $query."<br>";
                     $conn->query($query);
 
@@ -167,7 +167,7 @@
                 $i++;
             }
 
-            $query = "DELETE FROM diplomes_etudiant where (annee ='' or titre ='' or ville ='' ) and lower(etudiant_apogee)='$numero_apogee' ";
+            $query = "DELETE FROM Diplomes_etudiant where (annee ='' or titre ='' or ville ='' ) and lower(etudiant_apogee)='$numero_apogee' ";
             //echo $query."<br>";
             $conn->query($query);
 

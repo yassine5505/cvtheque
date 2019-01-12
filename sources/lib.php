@@ -202,6 +202,7 @@ function filterOffres($competence, $duree, $nomEntreprise,$conn){
   else if("" != $duree){
     $query .= " and offres.duree like '%$duree%' ";
   }
+  $query.= " group by offres.id";
   $selectOffres = $conn->query($query);
   if($selectOffres) return $selectOffres;
   else if($selectOffres->rowCount() == 0){
@@ -216,7 +217,7 @@ function filterCv($competence,$experience,$diplome,$conn){
   $diplome = strtolower($diplome);
 
   // $selectOffres = $conn->prepare("SELECT * FROM offres inner JOIN entreprises on offres.entreprise_id=entreprise.id where entreprise.nom like :nomEntreprise or offres.initule like :intitule or offres.duree like :duree");
-  $query ="select distinct etudiants.nom,etudiants.prenom,etudiants.phone,etudiants.image,etudiants.numero_apogee as apogee,etudiants.email,competences.competence,experiences_etudiant.titre as etitre,diplomes_etudiant.titre as dtitre from etudiants inner join competences on etudiants.numero_apogee=competences.apogee_etudiant inner join experiences_etudiant on etudiants.numero_apogee=experiences_etudiant.etudiant_apogee inner join diplomes_etudiant on etudiants.numero_apogee=diplomes_etudiant.etudiant_apogee where 1=1
+  $query ="select distinct etudiants.nom,etudiants.prenom,etudiants.phone,etudiants.image,etudiants.numero_apogee as apogee,etudiants.email,competences.competence,experiences_etudiant.titre as etitre,Diplomes_etudiant.titre as dtitre from etudiants inner join competences on etudiants.numero_apogee=competences.apogee_etudiant inner join experiences_etudiant on etudiants.numero_apogee=experiences_etudiant.etudiant_apogee inner join Diplomes_etudiant on etudiants.numero_apogee=Diplomes_etudiant.etudiant_apogee where 1=1 
   ";
   if("" != $competence){
     $query.= " and lower(competences.competence) LIKE '%$competence%' ";
@@ -225,10 +226,11 @@ function filterCv($competence,$experience,$diplome,$conn){
     $query .= " and lower(experiences_etudiant.titre) like '%$experience%' ";
   }
   else if("" != $diplome){
-    $query .= " and diplomes_etudiant.titre like '%$diplome%' ";
+    $query .= " and Diplomes_etudiant.titre like '%$diplome%' ";
   }
-  // $query.=" group by etudiants.numero_apogee";
+   $query.=" group by etudiants.numero_apogee";
   $selectOffres = $conn->query($query);
+
   if($selectOffres) return $selectOffres;
   else if($selectOffres->rowCount() == 0){
     return false;
